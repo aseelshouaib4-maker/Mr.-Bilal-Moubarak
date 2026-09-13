@@ -1,26 +1,849 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-navy-950: #0a1f35;
+  --color-navy-900: #0f2e4d;
+  --color-navy-700: #274c77;
+  --color-navy-500: #3f6a99;
+  --color-mist: #b7c6db;
+  --color-mist-light: #d6e0ec;
+  --color-parchment: #e8ddc6;
+  --color-paper: #fcfaf2;
+  --color-parchment-light: #f4eee2;
+  --color-parchment-deep: #d9caa9;
+  --color-umber: #6d5b49;
+  --color-umber-light: #9a8468;
+  --color-ink: #142033;
+  --color-slate: #27435f;
+  --color-gold: #c2a36b;
+
+  --font-display: var(--font-dm-serif), Georgia, "Times New Roman", serif;
+  --font-body: var(--font-fustat), system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  scroll-behavior: auto;
+  -webkit-text-size-adjust: 100%;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-navy-700);
+  color: var(--color-parchment-light);
+}
+
+/* Display type: DM Serif Text for Latin, Fustat (no serif available) for
+   Arabic. DM Serif Text comes in one weight, a high-contrast text cut that
+   holds up at display sizes with a little negative tracking. */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  line-height: 1.12;
+}
+html[lang="ar"] .font-display {
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.25;
+}
+html[lang="ar"] body {
+  line-height: 1.85;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+html[lang="ar"] .eyebrow {
+  letter-spacing: 0;
+  font-size: 0.85rem;
+}
+
+/* SplitText line masks */
+.split-line {
+  display: block;
+}
+[data-split] {
+  text-wrap: balance;
+}
+
+/* Focus rings */
+:where(a, button, input, textarea, select):focus-visible {
+  outline: 2px solid var(--color-navy-700);
+  outline-offset: 3px;
+}
+.on-dark :where(a, button, input, textarea, select):focus-visible {
+  outline-color: var(--color-mist);
+}
+
+/* Utility: hairline rules with cartographic ticks */
+.rule-ticks {
+  background-image: linear-gradient(currentColor, currentColor),
+    repeating-linear-gradient(
+      to right,
+      currentColor 0 1px,
+      transparent 1px 24px
+    );
+  background-size:
+    100% 1px,
+    100% 6px;
+  background-position:
+    0 50%,
+    0 0;
+  background-repeat: no-repeat;
+  height: 6px;
+  opacity: 0.5;
+}
+
+/* Tape strips */
+.tape {
+  position: absolute;
+  width: 88px;
+  height: 26px;
+  background: rgba(214, 224, 236, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(1px);
+  box-shadow: 0 1px 2px rgba(20, 32, 51, 0.15);
+  pointer-events: none;
+}
+
+
+/* Primary nav: no rules under the labels. State is carried by colour and
+   weight alone, so the bar stays quiet until something is current. */
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: 0.25rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+  color: var(--color-umber-light);
+  cursor: pointer;
+  transition:
+    color 0.35s var(--ease-out-expo),
+    font-weight 0.2s linear,
+    opacity 0.35s var(--ease-out-expo);
+}
+.nav-link:hover {
+  color: var(--color-navy-900);
+}
+.nav-link[aria-current="true"] {
+  color: var(--color-navy-900);
+  font-weight: 600;
+}
+.on-nav-dark .nav-link,
+.on-dark .nav-link {
+  color: rgba(183, 198, 219, 0.72);
+}
+.on-nav-dark .nav-link:hover,
+.on-nav-dark .nav-link[aria-current="true"],
+.on-dark .nav-link:hover {
+  color: var(--color-parchment-light);
+}
+
+/* Thin divider between the section links and the language switch. */
+.nav-sep {
+  width: 1px;
+  height: 18px;
+  background: currentColor;
+  opacity: 0.2;
+}
+
+/* Underline link */
+.link-line {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding-block: 0.35rem;
+  min-height: 44px;
+  cursor: pointer;
+}
+.link-line::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform-origin: var(--origin-start, left);
+  transition: transform 0.45s var(--ease-out-expo);
+}
+html[dir="rtl"] .link-line::after {
+  --origin-start: right;
+}
+.link-line:hover::after {
+  transform: scaleX(0.4);
+}
+
+
+/* Hero headline: a touch tighter than the display default, which the serif
+   can carry at this size. Arabic keeps its own looser line. */
+.hero-title {
+  line-height: 1.1;
+}
+html[lang="ar"] .hero-title {
+  line-height: 1.22;
+}
+
+/* Services rides up onto the last viewport of the pinned hero, which is plain
+   paper by then, so there is no empty stretch between the two. Only where the
+   hero actually pins (desktop, motion allowed). */
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .services-overlap {
+    margin-top: -100svh;
+  }
+}
+
+/* Hero stat: a small figure above the headline, beside a hairline rule. */
+.hero-stat-num {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.45rem, 1.9vw, 1.8rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-navy-900);
+}
+html[lang="ar"] .hero-stat-num {
+  font-family: var(--font-display);
+}
+
+/* Buttons, after "Subtle Button" by Jatin Yadav (21st.dev), in the studio's
+   palette. A pill with a fine edge and a gold survey point beside the label.
+   On hover a soft sheen sweeps across, the edge warms to gold and pulses, a
+   faint gold tint gathers inside, the point sends out a ripple, and the whole
+   button leans forward a little; it presses back in when clicked. Each variant
+   only sets the custom properties below. */
+.btn {
+  --btn-bg: transparent;
+  --btn-fg: var(--color-navy-900);
+  --btn-fg-hover: var(--btn-fg);
+  --btn-border: rgba(15, 46, 77, 0.35);
+  --btn-border-hover: var(--color-navy-900);
+  --btn-shadow: 0 0 0 0 transparent;
+  --btn-glow: rgba(15, 46, 77, 0.35);
+  --btn-sheen: rgba(15, 46, 77, 0.07);
+  --btn-tint: rgba(194, 163, 107, 0.14);
+  --btn-ring: rgba(194, 163, 107, 0.45);
+  --btn-dot: var(--color-gold);
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 40px;
+  padding-block: 0.5rem;
+  padding-inline: 1.3rem 1.1rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--btn-border);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-weight: 500;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  box-shadow: var(--btn-shadow);
+  transition:
+    color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.5s cubic-bezier(0, 0, 0.2, 1),
+    box-shadow 0.5s cubic-bezier(0, 0, 0.2, 1),
+    scale 0.5s cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* The sheen: a soft band of light that crosses once per hover. */
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(100deg, transparent 20%, var(--btn-sheen) 50%, transparent 80%);
+  translate: -100% 0;
+  transition: translate 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+html[dir="rtl"] .btn::before {
+  translate: 100% 0;
+}
+
+/* The ring: a gold edge that breathes while the pointer is on the button. */
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  border: 1.5px solid transparent;
+  opacity: 0;
+  transition:
+    opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: btn-breathe 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* The survey point beside the label, with a halo and a ripple held at zero
+   until hover. */
+.btn-dot {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--btn-dot);
+  transition: scale 0.5s cubic-bezier(0, 0, 0.2, 1);
+}
+.btn-dot::before,
+.btn-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--btn-dot);
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-dot::before {
+  animation: btn-breathe 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+.btn-dot::after {
+  animation: btn-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@media (hover: hover) {
+  .btn:hover {
+    color: var(--btn-fg-hover);
+    border-color: var(--btn-border-hover);
+    box-shadow:
+      0 14px 30px -16px var(--btn-glow),
+      inset 0 0 22px var(--btn-tint);
+    scale: 1.03;
+  }
+  .btn:hover::before {
+    translate: 100% 0;
+  }
+  html[dir="rtl"] .btn:hover::before {
+    translate: -100% 0;
+  }
+  .btn:hover::after {
+    opacity: 1;
+    border-color: var(--btn-ring);
+  }
+  .btn:hover .btn-dot::before {
+    opacity: 0.35;
+  }
+  .btn:hover .btn-dot::after {
+    opacity: 0.75;
+  }
+}
+.btn:focus-visible {
+  border-color: var(--btn-border-hover);
+  box-shadow:
+    0 14px 30px -16px var(--btn-glow),
+    inset 0 0 22px var(--btn-tint);
+}
+.btn:active {
+  scale: 0.97;
+}
+.btn:disabled {
+  cursor: default;
+  opacity: 0.7;
+  scale: 1;
+}
+
+@keyframes btn-ping {
+  75%,
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+@keyframes btn-breathe {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Primary on paper: no fill. A full navy edge carries the weight, which is
+   what sets it apart from the lighter outline beside it; on hover the edge
+   warms to gold. */
+.btn-solid {
+  --btn-bg: rgba(252, 250, 242, 0.35);
+  --btn-fg: var(--color-navy-900);
+  --btn-border: var(--color-navy-900);
+  --btn-border-hover: var(--color-gold);
+  --btn-glow: rgba(15, 46, 77, 0.4);
+  --btn-sheen: rgba(15, 46, 77, 0.08);
+  --btn-tint: rgba(194, 163, 107, 0.16);
+  --btn-ring: rgba(194, 163, 107, 0.45);
+}
+
+/* Secondary on paper: a glassy outline that never fills. */
+.btn-outline {
+  --btn-bg: rgba(252, 250, 242, 0.35);
+  --btn-fg: var(--color-navy-900);
+  --btn-border: rgba(15, 46, 77, 0.35);
+  --btn-border-hover: var(--color-navy-900);
+}
+
+/* On navy: the reference's own form, a light edge on a dark ground. */
+.btn-ghost {
+  --btn-bg: transparent;
+  --btn-fg: var(--color-parchment-light);
+  --btn-fg-hover: #fff;
+  --btn-border: rgba(244, 238, 226, 0.6);
+  --btn-border-hover: var(--color-parchment-light);
+  --btn-glow: rgba(244, 238, 226, 0.22);
+  --btn-sheen: rgba(255, 255, 255, 0.08);
+  --btn-tint: rgba(194, 163, 107, 0.12);
+  --btn-ring: rgba(194, 163, 107, 0.35);
+}
+
+/* Contact sheet. A parchment card lying on the paper, with soft filled fields
+   inside it; the fields lift to white and take a gold rule on focus. */
+.contact-card {
+  border: 1px solid rgba(15, 46, 77, 0.08);
+  border-radius: 1.75rem;
+  background: var(--color-parchment-light);
+  box-shadow: 0 40px 70px -56px rgba(20, 32, 51, 0.45);
+}
+.field {
+  width: 100%;
+  border: 1px solid rgba(15, 46, 77, 0.1);
+  border-radius: 0.8rem;
+  background: var(--color-paper);
+  padding: 0.8rem 1rem;
+  color: var(--color-ink);
+  font-size: 0.95rem;
+  transition:
+    border-color 0.35s var(--ease-out-expo),
+    box-shadow 0.35s var(--ease-out-expo),
+    background-color 0.35s var(--ease-out-expo);
+}
+.field::placeholder {
+  color: rgba(109, 91, 73, 0.55);
+}
+.field:hover {
+  border-color: rgba(15, 46, 77, 0.22);
+}
+.field:focus {
+  outline: none;
+  background: #fff;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 3px rgba(194, 163, 107, 0.22);
+}
+.field-label {
+  color: var(--color-umber);
+  transition: color 0.35s var(--ease-out-expo);
+}
+label:focus-within .field-label {
+  color: var(--color-navy-900);
+}
+
+/* Small bordered tile for a contact detail's icon. */
+.info-tile {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.7rem;
+  border: 1px solid rgba(15, 46, 77, 0.12);
+  background: var(--color-paper);
+  color: var(--color-navy-900);
+  transition:
+    border-color 0.35s var(--ease-out-expo),
+    background-color 0.35s var(--ease-out-expo);
+}
+a:hover > .info-tile,
+a.info-tile:hover,
+a.info-tile:focus-visible {
+  border-color: var(--color-gold);
+  background: #fff;
+}
+
+/* Service sheets: square at rest, leaning under the cursor. The hover lives
+   on the inner sheet because GSAP owns the outer element's transform. */
+.sheet-card {
+  transition:
+    transform 0.55s var(--ease-out-expo),
+    box-shadow 0.55s var(--ease-out-expo);
+  box-shadow: 0 24px 50px -36px rgba(20, 32, 51, 0.5);
+}
+.service-sheet:hover .sheet-card,
+.service-sheet:focus-within .sheet-card {
+  transform: translateY(-6px) rotate(var(--tilt, -1.8deg));
+  box-shadow: 0 34px 60px -34px rgba(20, 32, 51, 0.6);
+}
+
+/* Project cards */
+.work-card {
+  transition:
+    transform 0.5s var(--ease-out-expo),
+    box-shadow 0.5s var(--ease-out-expo),
+    border-color 0.5s var(--ease-out-expo);
+}
+.work-card .work-img svg {
+  transform: scale(1.06);
+  transition: transform 0.9s var(--ease-out-expo);
+}
+.work-card:hover,
+.work-card:focus-within {
+  transform: translateY(-6px);
+  border-color: rgba(15, 46, 77, 0.25);
+  box-shadow: 0 30px 60px -36px rgba(20, 32, 51, 0.5);
+}
+.work-card:hover .work-img svg,
+.work-card:focus-within .work-img svg {
+  transform: scale(1.12);
+}
+
+/* Method route. Each stop is a zero-size anchor placed on the line by script;
+   the marker, the leader and the label hang off it. GSAP owns the transforms
+   of .route-mark, .route-leader and .route-card, so positioning offsets live
+   on other elements (margins, and the .route-slot wrapper). */
+.route-stop {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+}
+.route-mark {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0 -12px;
+  display: grid;
+  place-items: center;
+}
+.route-dot {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--color-navy-900);
+  box-shadow: 0 0 0 4px var(--color-parchment-light);
+  transition:
+    transform 0.6s var(--ease-out-expo),
+    box-shadow 0.6s var(--ease-out-expo);
+}
+.route-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  border: 1px solid var(--color-navy-900);
+  opacity: 0;
+  transform: scale(0.6);
+}
+/* The current stop: a larger point with a hairline halo, and two staggered
+   ripples spreading from it and fading out. */
+.is-current .route-dot {
+  transform: scale(1.3);
+  box-shadow:
+    0 0 0 4px var(--color-parchment-light),
+    0 0 0 5px rgba(15, 46, 77, 0.35);
+}
+.is-current .route-ring {
+  animation: node-pulse 2.6s ease-out infinite;
+}
+.is-current .route-ring--late {
+  animation-delay: 1.3s;
+}
+
+/* Leader from the point to its label: a short dotted surveyor's line. */
+.route-leader {
+  position: absolute;
+  left: -0.5px;
+  width: 1px;
+  height: 38px;
+  background-image: linear-gradient(to bottom, rgba(15, 46, 77, 0.55) 0 2px, transparent 2px 5px);
+  background-size: 1px 5px;
+}
+.is-above .route-leader {
+  bottom: 16px;
+  transform-origin: 50% 100%;
+}
+.is-below .route-leader {
+  top: 16px;
+  transform-origin: 50% 0%;
+}
+
+/* Label slot: centred on the point, above or below the line. */
+.route-slot {
+  position: absolute;
+  left: 0;
+  width: clamp(12.5rem, 19vw, 19rem);
+  margin-left: calc(clamp(12.5rem, 19vw, 19rem) / -2);
+  text-align: center;
+}
+.is-above .route-slot {
+  bottom: 60px;
+}
+.is-below .route-slot {
+  top: 60px;
+}
+/* Stops already passed step back a little behind the current one. */
+.route-card-inner {
+  transition: opacity 0.6s var(--ease-out-expo);
+}
+.route-stop.is-reached:not(.is-current) .route-card-inner {
+  opacity: 0.62;
+}
+
+/* Narrow screens: the marker sits on the vertical line at the start edge. */
+.m-mark {
+  left: auto;
+  inset-inline-start: 0;
+  top: 1.2rem;
+  margin: 0;
+}
+.m-stop:not(.is-reached) .route-dot {
+  transform: scale(0.6);
+  background: var(--color-parchment-light);
+  box-shadow:
+    0 0 0 4px var(--color-parchment-light),
+    inset 0 0 0 1.5px rgba(15, 46, 77, 0.45);
+}
+
+@keyframes node-pulse {
+  0% {
+    opacity: 0.75;
+    transform: scale(0.6);
+  }
+  70% {
+    opacity: 0;
+    transform: scale(2.2);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.2);
+  }
+}
+
+/* Typewriter caret (Experience quote): a fine gold rule that travels with the
+   pen, then blinks slowly a few times and fades once the line is written. */
+.type-caret {
+  display: inline-block;
+  width: 1.5px;
+  height: 0.9em;
+  margin-inline-start: 0.06em;
+  vertical-align: -0.08em;
+  background: var(--color-gold);
+}
+.type-caret.is-done {
+  animation:
+    caret-blink 1.2s ease-in-out 3,
+    caret-out 0.8s ease 3.6s forwards;
+}
+@keyframes caret-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.15;
+  }
+}
+@keyframes caret-out {
+  to {
+    opacity: 0;
+  }
+}
+
+/* Bearing compass (Experience). */
+.compass-point {
+  position: absolute;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: -1.25rem 0 0 -1.25rem;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.compass-dot {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  border: 1px solid rgba(194, 163, 107, 0.45);
+  /* Painted in the section's own colour so the point masks the dial lines
+     behind it without showing as a darker disc. */
+  background: var(--compass-ground, var(--color-navy-900));
+  color: var(--color-gold);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease,
+    transform 0.4s ease;
+}
+.compass-point:hover .compass-dot {
+  border-color: var(--color-gold);
+  transform: scale(1.08);
+}
+.compass-point.is-on .compass-dot {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-navy-950);
+  box-shadow: 0 0 0 5px rgba(194, 163, 107, 0.14);
+}
+.compass-label {
+  position: absolute;
+  display: none;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1rem;
+  color: rgba(244, 238, 226, 0.62);
+  pointer-events: none;
+  transition: color 0.4s ease;
+}
+html[lang="ar"] .compass-label {
+  font-family: var(--font-body);
+  font-weight: 500;
+}
+@media (min-width: 640px) {
+  .compass-label {
+    display: block;
+  }
+}
+.compass-point:hover .compass-label,
+.compass-point.is-on .compass-label {
+  color: var(--color-parchment-light);
+}
+.compass-label.is-right {
+  left: calc(100% + 0.75rem);
+  top: 50%;
+  transform: translateY(-50%);
+}
+.compass-label.is-left {
+  right: calc(100% + 0.75rem);
+  top: 50%;
+  transform: translateY(-50%);
+}
+.compass-label.is-top {
+  bottom: calc(100% + 0.6rem);
+  left: 50%;
+  transform: translateX(-50%);
+}
+.compass-label.is-bottom {
+  top: calc(100% + 0.6rem);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Magnetic pills */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-height: 44px;
+  padding: 0.55rem 1.15rem;
+  border: 1px solid rgba(183, 198, 219, 0.3);
+  border-radius: 999px;
+  font-size: 0.92rem;
+  transition:
+    background-color 0.4s var(--ease-out-expo),
+    border-color 0.4s var(--ease-out-expo);
+}
+.pill:hover {
+  background: rgba(183, 198, 219, 0.08);
+  border-color: rgba(183, 198, 219, 0.6);
+}
+
+/* Spotlight tiles */
+.spot {
+  position: relative;
+  overflow: hidden;
+  --mx: 50%;
+  --my: 50%;
+  transition: border-color 0.5s var(--ease-out-expo);
+}
+.spot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(240px circle at var(--mx) var(--my), var(--spot), transparent 62%);
+  opacity: 0;
+  transition: opacity 0.5s var(--ease-out-expo);
+  pointer-events: none;
+}
+.spot:hover::before,
+.spot:focus-within::before {
+  opacity: 1;
+}
+.spot:hover,
+.spot:focus-within {
+  border-color: rgba(183, 198, 219, 0.4);
+}
+.spot > * {
+  position: relative;
+}
+.spot-line {
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.45s var(--ease-out-expo),
+    transform 0.45s var(--ease-out-expo);
+}
+.spot:hover .spot-line,
+.spot:focus-within .spot-line {
+  opacity: 1;
+  transform: none;
+}
+
+/* Reduced motion: render every scene in its final state. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .route-card-inner,
+  .spot-line {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

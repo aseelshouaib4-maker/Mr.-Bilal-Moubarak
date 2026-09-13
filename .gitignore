@@ -22,7 +22,15 @@
 
 # misc
 .DS_Store
+Thumbs.db
+desktop.ini
 *.pem
+
+# build caches
+.turbo
+
+# local editor / assistant settings (per-machine, may hold local permissions)
+.claude/settings.local.json
 
 # debug
 npm-debug.log*
