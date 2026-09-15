@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Wide, landscape screens: where the full hero composition runs. */
+@custom-variant wide (@media (min-width: 1024px) and (orientation: landscape));
+
 @theme {
   --color-navy-950: #0a1f35;
   --color-navy-900: #0f2e4d;
@@ -156,7 +159,7 @@ html[lang="ar"] .eyebrow {
 .nav-link:hover {
   color: var(--color-navy-900);
 }
-.nav-link[aria-current="true"] {
+.nav-link[aria-current="page"] {
   color: var(--color-navy-900);
   font-weight: 600;
 }
@@ -165,7 +168,7 @@ html[lang="ar"] .eyebrow {
   color: rgba(183, 198, 219, 0.72);
 }
 .on-nav-dark .nav-link:hover,
-.on-nav-dark .nav-link[aria-current="true"],
+.on-nav-dark .nav-link[aria-current="page"],
 .on-dark .nav-link:hover {
   color: var(--color-parchment-light);
 }
@@ -217,8 +220,8 @@ html[lang="ar"] .hero-title {
 
 /* Services rides up onto the last viewport of the pinned hero, which is plain
    paper by then, so there is no empty stretch between the two. Only where the
-   hero actually pins (desktop, motion allowed). */
-@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+   hero actually pins (wide landscape screens, motion allowed). */
+@media (min-width: 1024px) and (orientation: landscape) and (prefers-reduced-motion: no-preference) {
   .services-overlap {
     margin-top: -100svh;
   }
@@ -831,6 +834,274 @@ html[lang="ar"] .compass-label {
   transform: none;
 }
 
+/* ---------------------------------------------------------------------------
+   Inner pages
+   --------------------------------------------------------------------------- */
+
+/* Select styled like the other fields, with a drawn chevron. */
+.field-select {
+  appearance: none;
+  cursor: pointer;
+  padding-inline-end: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23274c77' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 16px 16px;
+  background-position: right 0.9rem center;
+}
+html[dir="rtl"] .field-select {
+  background-position: left 0.9rem center;
+}
+.field-select:invalid,
+.field-select option[value=""] {
+  color: rgba(109, 91, 73, 0.55);
+}
+
+/* Quiet surface card used across the inner pages. */
+.sheet {
+  border: 1px solid rgba(15, 46, 77, 0.09);
+  border-radius: 1.25rem;
+  background: var(--color-parchment-light);
+  transition:
+    border-color 0.45s var(--ease-out-expo),
+    box-shadow 0.45s var(--ease-out-expo),
+    transform 0.45s var(--ease-out-expo);
+}
+.sheet-hover:hover {
+  border-color: rgba(194, 163, 107, 0.55);
+  box-shadow: 0 26px 50px -38px rgba(20, 32, 51, 0.45);
+  transform: translateY(-3px);
+}
+
+/* Small pill tags and filter chips. */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 46, 77, 0.12);
+  font-size: 0.74rem;
+  color: var(--color-umber);
+  background: var(--color-paper);
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 38px;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 46, 77, 0.14);
+  font-size: 0.82rem;
+  color: var(--color-navy-900);
+  background: transparent;
+  cursor: pointer;
+  transition:
+    background-color 0.35s var(--ease-out-expo),
+    border-color 0.35s var(--ease-out-expo),
+    color 0.35s var(--ease-out-expo);
+}
+.chip:hover {
+  border-color: rgba(15, 46, 77, 0.35);
+}
+.chip[aria-pressed="true"] {
+  background: var(--color-navy-900);
+  border-color: var(--color-navy-900);
+  color: var(--color-parchment-light);
+}
+.chip-count {
+  font-size: 0.68rem;
+  opacity: 0.6;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Cards that arrive when a filter changes. */
+.card-in {
+  animation: card-in 0.6s var(--ease-out-expo) both;
+}
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Process page: one dotted route down the stages, a marker on each. */
+.stage-list {
+  position: relative;
+}
+.stage-list::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 1.25rem;
+  top: 2.5rem;
+  bottom: 2.5rem;
+  border-inline-start: 1.5px dotted rgba(15, 46, 77, 0.3);
+}
+.stage-marker {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(194, 163, 107, 0.6);
+  background: var(--color-paper);
+  color: var(--color-navy-900);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  transition:
+    background-color 0.45s var(--ease-out-expo),
+    color 0.45s var(--ease-out-expo);
+}
+.stage:hover .stage-marker {
+  background: var(--color-navy-900);
+  color: var(--color-parchment-light);
+}
+
+/* About: feature cards. Each drawing wakes a little under the cursor. */
+.feat-card {
+  background: var(--color-paper);
+  transition:
+    border-color 0.45s var(--ease-out-expo),
+    box-shadow 0.45s var(--ease-out-expo);
+}
+.feat-card:hover {
+  border-color: rgba(194, 163, 107, 0.55);
+  box-shadow: 0 30px 60px -46px rgba(20, 32, 51, 0.5);
+}
+.feat-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.7s var(--ease-out-expo);
+}
+.feat-card:hover .feat-ring {
+  transform: rotate(-4deg) scale(1.03);
+}
+.feat-card:hover .feat-ring--outer {
+  transform: rotate(3deg) scale(1.04);
+}
+.feat-layer {
+  transition:
+    transform 0.45s var(--ease-out-expo),
+    opacity 0.45s var(--ease-out-expo);
+}
+.feat-card:hover .feat-layer:not(.feat-layer--off) {
+  transform: translateX(4px);
+}
+html[dir="rtl"] .feat-card:hover .feat-layer:not(.feat-layer--off) {
+  transform: translateX(-4px);
+}
+.feat-card:hover .feat-layer--off {
+  opacity: 0.45;
+}
+.feat-toggle {
+  position: relative;
+  width: 1.6rem;
+  height: 0.9rem;
+  border-radius: 999px;
+  background: rgba(15, 46, 77, 0.14);
+}
+.feat-toggle::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  inset-inline-start: 2px;
+  width: calc(0.9rem - 4px);
+  height: calc(0.9rem - 4px);
+  border-radius: 999px;
+  background: var(--color-paper);
+  box-shadow: 0 1px 2px rgba(20, 32, 51, 0.25);
+}
+.feat-toggle.is-on {
+  background: var(--color-navy-900);
+}
+.feat-toggle.is-on::after {
+  inset-inline-start: calc(100% - 0.9rem + 2px);
+}
+.feat-grid {
+  transition: opacity 0.5s var(--ease-out-expo);
+}
+.feat-pin {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.feat-card:hover .feat-pin {
+  transform: scale(1.6);
+}
+.feat-legend {
+  transition: transform 0.5s var(--ease-out-expo);
+}
+.feat-card:hover .feat-legend {
+  transform: translateY(-3px);
+}
+.feat-profile {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+.feat-card:hover .feat-profile {
+  animation: feat-draw 1.2s var(--ease-out-expo);
+}
+@keyframes feat-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Contact: questions. */
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+.faq-mark {
+  position: relative;
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 46, 77, 0.15);
+  transition:
+    border-color 0.35s var(--ease-out-expo),
+    background-color 0.35s var(--ease-out-expo);
+}
+.faq-mark::before,
+.faq-mark::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 1.5px;
+  background: var(--color-navy-900);
+  translate: -50% -50%;
+  transition: rotate 0.4s var(--ease-out-expo);
+}
+.faq-mark::after {
+  rotate: 90deg;
+}
+.faq[open] .faq-mark {
+  border-color: var(--color-gold);
+  background: rgba(194, 163, 107, 0.12);
+}
+.faq[open] .faq-mark::after {
+  rotate: 0deg;
+}
+.faq summary:hover .faq-mark {
+  border-color: var(--color-gold);
+}
+.faq[open] > p {
+  animation: card-in 0.5s var(--ease-out-expo) both;
+}
+
 /* Reduced motion: render every scene in its final state. */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -842,6 +1113,7 @@ html[lang="ar"] .compass-label {
   }
 
   .route-card-inner,
+  .card-in,
   .spot-line {
     opacity: 1 !important;
     transform: none !important;

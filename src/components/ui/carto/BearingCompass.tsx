@@ -145,7 +145,7 @@ export default function BearingCompass({ labels, lines, className = "" }: Props)
             transition={{ duration: 0.4, ease: EASE }}
             className="px-1"
           >
-            <p className="eyebrow !text-[0.6rem] text-gold">{String(active + 1).padStart(2, "0")}</p>
+            <p className="eyebrow !text-[0.68rem] text-gold">{String(active + 1).padStart(2, "0")}</p>
             <p className="font-display mt-1.5 text-[clamp(0.95rem,2.2vw,1.35rem)] leading-tight text-parchment-light">{labels[active]}</p>
             <p className="mt-1.5 hidden text-[0.8rem] leading-snug text-mist sm:block">{lines[active]}</p>
           </motion.div>

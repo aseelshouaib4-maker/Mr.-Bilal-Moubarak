@@ -88,10 +88,7 @@ export default function Services() {
             >
               <Tape className={`-top-3 z-10 ${i % 2 ? "end-8 rotate-3" : "start-8 -rotate-3"}`} />
               <TornSheet seed={100 + i} className="sheet-card flex h-full flex-col p-6 md:p-7">
-                <div className="flex items-center justify-between">
-                  <span className="eyebrow text-navy-700/70">
-                    {t.services.sheet} 0{i + 1}
-                  </span>
+                <div className="flex items-center">
                   <span className="grid h-11 w-11 place-items-center rounded-full border border-navy-900/15 text-navy-900">
                     <ServiceIcon index={i} className="h-5 w-5" />
                   </span>

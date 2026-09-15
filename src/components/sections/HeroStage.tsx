@@ -9,6 +9,9 @@ import CountUp from "@/components/ui/CountUp";
 import heroMaps from "@/assets/hero-maps.png";
 import magnifier from "@/assets/magnifier.png";
 
+/** Where the full hero composition runs: wide, landscape screens. Mirrors the `wide` variant in globals.css. */
+const WIDE_QUERY = "(min-width: 1024px) and (orientation: landscape)";
+
 /**
  * Measured from magnifier.png (2000x2000): the glass circle is centred at
  * (1006, 628) with a radius of 352px. These map that circle onto the lens box.
@@ -60,7 +63,8 @@ export default function HeroStage() {
         .from(q(".loupe-ui"), { autoAlpha: 0, scale: 0.85, duration: 1.2 }, 0.9);
 
       const mm = gsap.matchMedia();
-      mm.add("(min-width: 768px)", () => {
+      // Wide landscape screens only: in portrait the collage would sit behind the text.
+      mm.add(WIDE_QUERY, () => {
         // One object drives the glass: its scale sets the magnifier and the
         // radius of every circle clipped to it, so they can never separate.
         const lens = { s: 1, mag: 1 };
@@ -152,7 +156,7 @@ export default function HeroStage() {
       <div className="relative flex min-h-[100svh] items-center overflow-hidden">
         {/* The sheet of maps. Mirrored under RTL so the open area of the
             composition always falls behind the headline. */}
-        <div className="hero-art-fade pointer-events-none absolute inset-0 hidden md:block" aria-hidden="true">
+        <div className="hero-art-fade pointer-events-none absolute inset-0 hidden wide:block" aria-hidden="true">
           <div className="absolute inset-0 overflow-hidden" data-hero-art data-depth="0.25">
             {collage}
           </div>
@@ -160,13 +164,13 @@ export default function HeroStage() {
 
         {/* Nav legibility scrim. */}
         <div
-          className="pointer-events-none absolute inset-x-0 top-0 hidden h-32 md:block"
+          className="pointer-events-none absolute inset-x-0 top-0 hidden h-32 wide:block"
           aria-hidden="true"
           style={{ background: "linear-gradient(to bottom, #fcfaf2 0%, rgba(252,250,242,0) 100%)" }}
         />
 
         <div className="relative mx-auto grid w-full max-w-[1600px] grid-cols-12 gap-6 px-5 pb-16 pt-28 md:px-10 md:pb-24">
-          <div className="hero-copy col-span-12 md:col-span-7 lg:col-span-6">
+          <div className="hero-copy col-span-12 wide:col-span-6">
             {/* Experience first, as one quiet line that counts itself in. */}
             <div className="flex items-center gap-3" data-hero-item>
               <p className="hero-stat-num flex items-start tabular-nums" dir="ltr">
@@ -195,7 +199,7 @@ export default function HeroStage() {
           </div>
 
           {/* Mobile: the same sheet, cropped to the map collage */}
-          <div className="col-span-12 md:hidden" data-hero-item>
+          <div className="col-span-12 wide:hidden" data-hero-item>
             <div className="relative aspect-[5/4] w-full overflow-hidden">
               <div className="absolute inset-0 rtl:-scale-x-100">
                 <Image src={heroMaps} alt="" fill sizes="100vw" style={{ objectFit: "cover", objectPosition: "100% 50%" }} />
@@ -209,7 +213,7 @@ export default function HeroStage() {
           follows the cursor parallax like the sheet itself, so it stays in
           register with what lies outside the rim. */}
       <div
-        className="lens-zoom pointer-events-none invisible absolute inset-0 hidden overflow-hidden opacity-0 md:block"
+        className="lens-zoom pointer-events-none invisible absolute inset-0 hidden overflow-hidden opacity-0 wide:block"
         style={{ clipPath: glassClip }}
         aria-hidden="true"
       >
@@ -222,14 +226,14 @@ export default function HeroStage() {
 
       {/* The clean page that opens through the glass and runs on into Services. */}
       <div
-        className="lens-paper pointer-events-none invisible absolute inset-0 hidden bg-paper opacity-0 md:block"
+        className="lens-paper pointer-events-none invisible absolute inset-0 hidden bg-paper opacity-0 wide:block"
         style={{ clipPath: glassClip }}
         aria-hidden="true"
       />
 
       {/* The magnifier, above both so its rim frames them. Its glass circle is mapped onto the lens box. */}
       <div
-        className="loupe-ui pointer-events-none absolute z-20 hidden md:block"
+        className="loupe-ui pointer-events-none absolute z-20 hidden wide:block"
         style={{
           left: "var(--cx)",
           top: "var(--cy)",

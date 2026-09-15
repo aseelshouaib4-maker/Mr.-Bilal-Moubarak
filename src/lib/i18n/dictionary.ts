@@ -1,12 +1,15 @@
+import { pagesAr, pagesEn } from "./pages";
+
 export type Lang = "en" | "ar";
 
 export const en = {
   meta: { studio: "Bilal Moubarak Cartography Studio", short: "Cartography Studio" },
   nav: {
-    about: "Studio",
+    home: "Home",
+    about: "About",
     services: "Services",
-    work: "Selected work",
-    process: "Method",
+    work: "Projects",
+    process: "Process",
     contact: "Contact",
     cta: "Start a project",
     langLabel: "العربية",
@@ -128,6 +131,7 @@ export const en = {
     rights: "All rights reserved.",
     linksLabel: "Navigate",
   },
+  pages: pagesEn,
 };
 
 export type Dict = typeof en;
@@ -135,9 +139,10 @@ export type Dict = typeof en;
 export const ar: Dict = {
   meta: { studio: "ستوديو بلال مبارك للخرائط", short: "ستوديو الخرائط" },
   nav: {
-    about: "الستوديو",
+    home: "الرئيسية",
+    about: "من نحن",
     services: "الخدمات",
-    work: "أعمال مختارة",
+    work: "المشاريع",
     process: "المنهجية",
     contact: "تواصل",
     cta: "ابدأ مشروعك",
@@ -242,6 +247,7 @@ export const ar: Dict = {
     rights: "جميع الحقوق محفوظة.",
     linksLabel: "تنقّل",
   },
+  pages: pagesAr,
 };
 
 export const dictionaries: Record<Lang, Dict> = { en, ar };
