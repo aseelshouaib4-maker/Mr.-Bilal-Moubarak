@@ -1102,6 +1102,131 @@ html[dir="rtl"] .feat-card:hover .feat-layer:not(.feat-layer--off) {
   animation: card-in 0.5s var(--ease-out-expo) both;
 }
 
+/* Loading screen. A paper sheet over the page on first load: the monogram and
+   name, a scale bar beneath them filling with the load, then a lens opens in
+   the middle and widens until the site shows through. */
+html.is-loading {
+  overflow: hidden;
+}
+.site-loader {
+  --hole: 0vmax;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 1.5rem;
+  background: var(--color-paper);
+  color: var(--color-navy-900);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, transparent var(--hole), #000 calc(var(--hole) + 1px));
+  mask-image: radial-gradient(circle at 50% 50%, transparent var(--hole), #000 calc(var(--hole) + 1px));
+}
+.site-loader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition:
+    opacity 0.45s var(--ease-out-expo),
+    transform 0.6s var(--ease-out-expo);
+}
+.site-loader.is-opening .site-loader-inner {
+  opacity: 0;
+  transform: scale(0.96);
+}
+.site-loader-monogram {
+  display: grid;
+  place-items: center;
+  width: 3.6rem;
+  height: 3.6rem;
+  border: 1px solid currentColor;
+  font-size: 1.3rem;
+  letter-spacing: -0.02em;
+  animation: loader-fade 0.9s var(--ease-out-expo) both;
+}
+.site-loader-name {
+  margin-top: 1.5rem;
+  font-size: clamp(1.35rem, 3vw, 1.7rem);
+  line-height: 1.1;
+  animation: loader-rise 0.9s var(--ease-out-expo) 0.15s both;
+}
+.site-loader-sub {
+  margin-top: 0.5rem;
+  color: var(--color-umber-light);
+  animation: loader-rise 0.9s var(--ease-out-expo) 0.28s both;
+}
+.site-loader-line {
+  width: min(18rem, 72vw);
+  margin-top: 2.25rem;
+  animation: loader-rise 0.9s var(--ease-out-expo) 0.4s both;
+}
+.site-loader-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.7rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  color: var(--color-umber);
+}
+/* Scale bar: a hairline with ticks, filled in navy as the page loads. */
+.site-loader-bar {
+  position: relative;
+  height: 6px;
+  background-image:
+    linear-gradient(rgba(15, 46, 77, 0.2), rgba(15, 46, 77, 0.2)),
+    repeating-linear-gradient(to right, rgba(15, 46, 77, 0.28) 0 1px, transparent 1px 20%);
+  background-size:
+    100% 1px,
+    100% 6px;
+  background-position:
+    0 50%,
+    0 0;
+  background-repeat: no-repeat;
+}
+.site-loader-fill {
+  position: absolute;
+  inset-inline: 0;
+  top: calc(50% - 1px);
+  height: 2px;
+  background: var(--color-navy-900);
+  transform-origin: left center;
+  transition: transform 0.2s linear;
+}
+html[dir="rtl"] .site-loader-fill {
+  transform-origin: right center;
+}
+.site-loader-fill::after {
+  content: "";
+  position: absolute;
+  inset-inline-end: -4px;
+  top: -3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--color-gold);
+}
+@keyframes loader-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes loader-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* Reduced motion: render every scene in its final state. */
 @media (prefers-reduced-motion: reduce) {
   *,

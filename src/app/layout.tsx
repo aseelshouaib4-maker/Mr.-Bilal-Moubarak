@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { DM_Serif_Text, Fustat } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/lib/i18n/LanguageProvider";
+import Loader from "@/components/site/Loader";
 
 const dmSerif = DM_Serif_Text({
   variable: "--font-dm-serif",
@@ -35,11 +36,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       dir="ltr"
-      className={`${dmSerif.variable} ${fustat.variable} h-full antialiased`}
+      className={`${dmSerif.variable} ${fustat.variable} is-loading h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
         <LanguageProvider>{children}</LanguageProvider>
+        {/* Covers the first paint until the page's pinned sections are built. */}
+        <Loader />
+        <noscript>
+          <style>{`.site-loader{display:none!important}html.is-loading{overflow:auto!important}`}</style>
+        </noscript>
       </body>
     </html>
   );
