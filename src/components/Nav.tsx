@@ -92,10 +92,11 @@ export default function Nav() {
   const ink = dark ? "text-parchment-light" : "text-navy-900";
 
   return (
+    <>
     <header
       ref={root}
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${ink} ${dark ? "on-nav-dark" : ""} ${
-        scrolled && !open ? (dark ? "bg-navy-900/70" : "bg-parchment/75") + " backdrop-blur-md" : ""
+      className={`fixed inset-x-0 top-0 z-50 ${open ? "" : "transition-colors duration-500"} ${ink} ${dark ? "on-nav-dark" : ""} ${
+        open ? "bg-navy-900" : scrolled ? (dark ? "bg-navy-900/70" : "bg-parchment/75") + " backdrop-blur-md" : ""
       }`}
     >
       <nav className="mx-auto flex h-[72px] max-w-[1600px] items-center justify-between px-5 md:px-10" aria-label="Primary">
@@ -151,16 +152,20 @@ export default function Nav() {
           </button>
         </div>
       </nav>
+    </header>
 
+      {/* Outside the header on purpose: the header is moved with a transform
+          (and blurred when scrolled), which would make it the containing block
+          of a fixed child and shrink the menu to the header's height. */}
       <div
         id="mobile-menu"
         hidden={!open}
-        className="on-dark fixed inset-0 top-[72px] z-40 flex flex-col justify-between bg-navy-900 px-6 pb-10 pt-10 text-parchment-light lg:hidden"
+        className="mobile-menu on-dark fixed inset-0 z-40 flex flex-col justify-between overflow-y-auto bg-navy-900 px-6 pb-10 pt-[calc(72px+1.5rem)] text-parchment-light lg:hidden"
         data-lenis-prevent
       >
-        <ul className="flex flex-col gap-2">
+        <ul className="flex flex-col gap-1">
           {links.map((l, i) => (
-            <li key={l.href}>
+            <li key={l.href} style={{ animationDelay: `${0.05 + i * 0.05}s` }}>
               <Link
                 href={l.href}
                 onClick={() => setOpen(false)}
@@ -173,11 +178,11 @@ export default function Nav() {
             </li>
           ))}
         </ul>
-        <Link href={ROUTES.contact} onClick={() => setOpen(false)} className="btn btn-ghost self-start">
+        <Link href={ROUTES.contact} onClick={() => setOpen(false)} className="btn btn-ghost mt-10 self-start">
           {t.nav.cta}
           <span className="btn-dot" aria-hidden="true" />
         </Link>
       </div>
-    </header>
+    </>
   );
 }

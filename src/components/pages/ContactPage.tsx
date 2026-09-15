@@ -46,15 +46,17 @@ const ICON = {
 
 function ChannelCard({ icon, label, children, note }: { icon: ReactNode; label: string; children: ReactNode; note: string }) {
   return (
-    <div className="sheet sheet-hover flex h-full flex-col p-6">
+    <div className="sheet sheet-hover grid h-full grid-cols-[2.5rem_1fr] gap-x-4 p-4 sm:flex sm:flex-col sm:p-6">
       <span className="info-tile" aria-hidden="true">
         <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" fill="none" stroke="currentColor" strokeWidth="1.4">
           {icon}
         </svg>
       </span>
-      <p className="eyebrow mt-6 text-umber-light">{label}</p>
-      <div className="mt-0.5 text-[1.02rem] text-navy-900">{children}</div>
-      <p className="mt-auto pt-4 text-[0.85rem] text-ink/60">{note}</p>
+      <div className="flex min-w-0 flex-col sm:flex-1">
+        <p className="eyebrow text-umber-light sm:mt-6">{label}</p>
+        <div className="text-[1rem] text-navy-900 sm:mt-0.5 sm:text-[1.02rem]">{children}</div>
+        <p className="text-[0.84rem] text-ink/60 sm:mt-auto sm:pt-4">{note}</p>
+      </div>
     </div>
   );
 }
@@ -77,7 +79,7 @@ function Intro() {
       <section data-nav-theme="light" className="bg-paper">
         <div className="mx-auto w-full max-w-[1600px] px-5 pt-14 md:px-10 md:pt-20">
           <Eyebrow className="text-navy-700">{c.channelsLabel}</Eyebrow>
-          <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" data-stagger>
+          <ul className="mt-6 grid gap-3 sm:mt-8 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4" data-stagger>
             <li>
               <ChannelCard icon={ICON.email} label={c.channels.email.k} note={c.channels.email.d}>
                 <a href={`mailto:${EMAIL}`} className="inline-block break-all py-2.5 underline decoration-navy-900/20 underline-offset-4 hover:decoration-gold" dir="ltr">
@@ -101,7 +103,7 @@ function Intro() {
               </ChannelCard>
             </li>
             <li>
-              <div className="sheet sheet-hover flex h-full flex-col p-6">
+              <div className="sheet sheet-hover flex h-full flex-col p-4 sm:p-6">
                 <ul className="flex gap-2">
                   {SOCIAL.map((s) => (
                     <li key={s.name}>
@@ -111,9 +113,9 @@ function Intro() {
                     </li>
                   ))}
                 </ul>
-                <p className="eyebrow mt-6 text-umber-light">{c.channels.follow.k}</p>
-                <p className="mt-2 text-[1.02rem] text-navy-900">Instagram · Facebook · LinkedIn</p>
-                <p className="mt-auto pt-4 text-[0.85rem] text-ink/60">{c.channels.follow.d}</p>
+                <p className="eyebrow mt-4 text-umber-light sm:mt-6">{c.channels.follow.k}</p>
+                <p className="mt-1 text-[1rem] text-navy-900 sm:mt-2 sm:text-[1.02rem]">Instagram · Facebook · LinkedIn</p>
+                <p className="text-[0.84rem] text-ink/60 sm:mt-auto sm:pt-4">{c.channels.follow.d}</p>
               </div>
             </li>
           </ul>
@@ -134,7 +136,7 @@ function Guidance() {
     <div ref={root}>
       {/* The brief, in five points. */}
       <section data-nav-theme="light" className="bg-parchment-light">
-        <div className="mx-auto grid w-full max-w-[1600px] gap-12 px-5 py-20 md:px-10 md:py-28 lg:grid-cols-12 lg:gap-8">
+        <div className="mx-auto grid w-full max-w-[1600px] gap-12 px-5 py-14 md:px-10 md:py-28 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-5">
             <Eyebrow className="text-navy-700">{c.briefLabel}</Eyebrow>
             <h2 className="font-display mt-5 text-[clamp(1.9rem,3.2vw,2.8rem)] leading-[1.12] text-navy-900" data-split>
@@ -160,7 +162,7 @@ function Guidance() {
 
       {/* What follows an enquiry. */}
       <section data-nav-theme="light" className="bg-paper">
-        <div className="mx-auto w-full max-w-[1600px] px-5 py-20 md:px-10 md:py-24">
+        <div className="mx-auto w-full max-w-[1600px] px-5 py-14 md:px-10 md:py-24">
           <Eyebrow className="text-navy-700">{c.nextLabel}</Eyebrow>
           <ol className="mt-10 grid gap-4 md:grid-cols-3" data-stagger>
             {c.next.map((step, i) => (
@@ -176,7 +178,7 @@ function Guidance() {
 
       {/* Common questions. */}
       <section data-nav-theme="light" className="bg-paper">
-        <div className="mx-auto grid w-full max-w-[1600px] gap-12 px-5 pb-24 md:px-10 md:pb-32 lg:grid-cols-12 lg:gap-8">
+        <div className="mx-auto grid w-full max-w-[1600px] gap-12 px-5 pb-16 md:px-10 md:pb-32 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-4">
             <Eyebrow className="text-navy-700">{c.faqLabel}</Eyebrow>
             <h2 className="font-display mt-5 text-[clamp(1.9rem,3.2vw,2.8rem)] leading-[1.12] text-navy-900" data-split>

@@ -21,8 +21,8 @@ export default function Footer() {
 
   return (
     <div data-nav-theme="dark" className="on-dark bg-navy-950 text-parchment-light">
-      <footer className="mx-auto w-full max-w-[1600px] px-5 pb-8 pt-16 md:px-10 md:pt-20">
-        <div className="grid gap-12 md:grid-cols-12 md:gap-8">
+      <footer className="mx-auto w-full max-w-[1600px] px-5 pb-8 pt-12 md:px-10 md:pt-20">
+        <div className="grid gap-9 md:grid-cols-12 md:gap-8">
           {/* The studio */}
           <div className="md:col-span-5">
             <Link href={ROUTES.home} className="inline-flex items-center gap-3">
@@ -32,8 +32,8 @@ export default function Footer() {
                 <span className="eyebrow !text-[0.68rem] opacity-70">{t.meta.short}</span>
               </span>
             </Link>
-            <p className="mt-6 max-w-[22rem] text-[0.92rem] leading-relaxed text-mist/80">{t.contact.footerTagline}</p>
-            <ul className="mt-6 flex items-center gap-2">
+            <p className="mt-5 max-w-[22rem] text-[0.92rem] leading-relaxed text-mist/80 md:mt-6">{t.contact.footerTagline}</p>
+            <ul className="mt-5 flex items-center gap-2 md:mt-6">
               {SOCIAL.map((s) => (
                 <li key={s.name}>
                   <a
@@ -53,10 +53,10 @@ export default function Footer() {
           {/* Pages */}
           <div className="md:col-span-3">
             <p className="eyebrow text-mist/55">{p.footerExplore}</p>
-            <ul className="mt-4 flex flex-col">
+            <ul className="mt-2 grid grid-cols-2 gap-x-6 md:mt-4 md:flex md:flex-col">
               {links.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="nav-link !min-h-[36px] !px-0">
+                  <Link href={l.href} className="nav-link !min-h-[40px] !px-0 md:!min-h-[36px]">
                     {l.label}
                   </Link>
                 </li>
@@ -88,7 +88,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-3 border-t border-mist/15 pt-6 text-[0.78rem] text-mist/55 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 flex flex-col gap-3 border-t border-mist/15 pt-6 md:mt-14 text-[0.78rem] text-mist/55 sm:flex-row sm:items-center sm:justify-between">
           <p dir={lang === "ar" ? "rtl" : "ltr"}>
             © {new Date().getFullYear()} {t.meta.studio}. {t.contact.rights}
           </p>

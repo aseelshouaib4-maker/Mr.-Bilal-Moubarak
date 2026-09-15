@@ -8,6 +8,9 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
 
 gsap.defaults({ ease: "power3.out", duration: 0.9 });
+// Phones resize the viewport as the address bar shows and hides; re-measuring
+// every pin on that would make the pinned hero jump mid-scroll.
+ScrollTrigger.config({ ignoreMobileResize: true });
 
 export { gsap, ScrollTrigger, SplitText, useGSAP };
 

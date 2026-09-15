@@ -22,7 +22,7 @@ function ProcessContent() {
       />
 
       <section data-nav-theme="light" className="bg-paper">
-        <div className="mx-auto w-full max-w-[1600px] px-5 py-16 md:px-10 md:py-24">
+        <div className="mx-auto w-full max-w-[1600px] px-5 py-12 md:px-10 md:py-24">
           {/* The seven stages along one route. */}
           <ol className="stage-list mx-auto flex max-w-[60rem] flex-col gap-4">
             {pr.steps.map((step, i) => (
@@ -52,7 +52,7 @@ function ProcessContent() {
 
       {/* The idea behind the order, on its own. */}
       <section data-nav-theme="light" className="bg-parchment-light">
-        <div className="mx-auto w-full max-w-[1600px] px-5 py-20 text-center md:px-10 md:py-28">
+        <div className="mx-auto w-full max-w-[1600px] px-5 py-14 text-center md:px-10 md:py-28">
           <div className="mx-auto max-w-[48rem]">
             <span className="mx-auto block h-px w-10 bg-gold" aria-hidden="true" />
             <p className="font-display mt-8 text-[clamp(1.5rem,2.8vw,2.4rem)] leading-[1.35] text-navy-900" data-split>

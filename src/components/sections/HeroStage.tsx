@@ -17,6 +17,8 @@ const WIDE_QUERY = "(min-width: 1024px) and (orientation: landscape)";
  * (1006, 628) with a radius of 352px. These map that circle onto the lens box.
  */
 const LOUPE_BASE = 150; // lens radius, in px
+const LOUPE_MOBILE = 64; // lens radius on the smaller mobile collage
+const MY = "48%"; // lens centre height on the mobile collage
 const GLASS = (() => {
   const IMG = 2000, CX = 1006, CY = 628, R = 352;
   const size = (IMG / (2 * R)) * 100;
@@ -47,6 +49,8 @@ export default function HeroStage() {
   const stage = useRef<HTMLElement>(null);
   const cx = dir === "rtl" ? 30 : 70;
   const cy = 56;
+  // Lens centre on the mobile collage, over the blue sheet.
+  const mx = dir === "rtl" ? "40%" : "60%";
 
   useGSAP(
     () => {
@@ -131,6 +135,55 @@ export default function HeroStage() {
         window.addEventListener("mousemove", onMove);
         return () => window.removeEventListener("mousemove", onMove);
       });
+
+      // Portrait and small screens: the same story on the cropped collage.
+      mm.add(`not all and ${WIDE_QUERY}`, () => {
+        const el = stage.current!;
+        const lens = { s: 1, mag: 1 };
+        const applyLens = () => {
+          el.style.setProperty("--loupe-s", `${lens.s}`);
+          el.style.setProperty("--mr", `${LOUPE_MOBILE * lens.s}px`);
+          el.style.setProperty("--mag", `${lens.mag}`);
+        };
+        applyLens();
+        // Large enough for the circle to reach every corner of the stage.
+        const coverScale = () => (Math.hypot(window.innerWidth, el.offsetHeight) * 1.05) / LOUPE_MOBILE;
+
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: el,
+              // Pin once the whole collage is on screen: at the top when the
+              // hero fits the viewport, otherwise when its bottom arrives.
+              start: () => (el.offsetHeight > window.innerHeight ? "bottom bottom" : "top top"),
+              end: "+=90%",
+              pin: true,
+              scrub: 1,
+              invalidateOnRefresh: true,
+            },
+          })
+          .to(q(".hero-copy"), { y: -40, autoAlpha: 0, duration: 0.3, ease: "power2.in" }, 0.02)
+          .to(q(".m-zoom"), { autoAlpha: 1, duration: 0.06, ease: "none" }, 0.02)
+          .to(lens, { mag: MAG_MAX, duration: 0.3, ease: "power2.out", onUpdate: applyLens }, 0.03)
+          .to(lens, { s: coverScale, duration: 0.7, ease: "power2.inOut", onUpdate: applyLens }, 0.02)
+          .to(q(".m-paper"), { autoAlpha: 1, duration: 0.26, ease: "power1.inOut" }, 0.26)
+          .to(q(".m-art"), { autoAlpha: 0, duration: 0.2, ease: "power2.in" }, 0.42)
+          .to(q(".loupe-img"), { autoAlpha: 0, duration: 0.17, ease: "power2.in" }, 0.45)
+          .to({}, { duration: 0.1 });
+
+        // Services rises onto the opened paper instead of after a blank screen.
+        // Set as a variable, not on Services' own style: a pin restores the
+        // style attribute it saved when it reverts, which would wipe it.
+        const root = document.documentElement;
+        root.style.setProperty("--hero-overlap", `${Math.round(window.innerHeight * 0.35)}px`);
+
+        return () => {
+          root.style.removeProperty("--hero-overlap");
+          el.style.setProperty("--loupe-s", "1");
+          el.style.setProperty("--mr", `${LOUPE_MOBILE}px`);
+          el.style.setProperty("--mag", "1");
+        };
+      });
     },
     { scope: stage, dependencies: [ready] },
   );
@@ -141,6 +194,7 @@ export default function HeroStage() {
     "--r": `${LOUPE_BASE}px`,
     "--loupe-s": "1",
     "--mag": "1",
+    "--mr": `${LOUPE_MOBILE}px`,
   } as CSSProperties;
 
   /** The collage, rendered identically outside and (enlarged) inside the glass. */
@@ -151,9 +205,33 @@ export default function HeroStage() {
   );
   const glassClip = "circle(var(--r) at var(--cx) var(--cy))";
 
+  const mobileCollage = (
+    <div className="absolute inset-0 rtl:-scale-x-100">
+      <Image src={heroMaps} alt="" fill sizes="100vw" style={{ objectFit: "cover", objectPosition: "100% 50%" }} />
+    </div>
+  );
+
+  /** The magnifier, its glass circle mapped onto the lens box it sits in. */
+  const loupe = (
+    <div
+      className="loupe-img absolute"
+      style={{
+        width: `${GLASS.size}%`,
+        height: `${GLASS.size}%`,
+        left: `${GLASS.left}%`,
+        top: `${GLASS.top}%`,
+        transformOrigin: `${GLASS.originX}% ${GLASS.originY}%`,
+        rotate: dir === "rtl" ? "45deg" : "-45deg",
+        scale: "var(--loupe-s)",
+      }}
+    >
+      <Image src={magnifier} alt="" fill sizes="(min-width: 1024px) 900px, 400px" style={{ objectFit: "contain" }} priority />
+    </div>
+  );
+
   return (
     <section ref={stage} id="hero" className="hero-stage relative overflow-hidden" style={vars}>
-      <div className="relative flex min-h-[100svh] items-center overflow-hidden">
+      <div className="relative flex items-center overflow-hidden wide:min-h-[100svh]">
         {/* The sheet of maps. Mirrored under RTL so the open area of the
             composition always falls behind the headline. */}
         <div className="hero-art-fade pointer-events-none absolute inset-0 hidden wide:block" aria-hidden="true">
@@ -169,7 +247,7 @@ export default function HeroStage() {
           style={{ background: "linear-gradient(to bottom, #fcfaf2 0%, rgba(252,250,242,0) 100%)" }}
         />
 
-        <div className="relative mx-auto grid w-full max-w-[1600px] grid-cols-12 gap-6 px-5 pb-16 pt-28 md:px-10 md:pb-24">
+        <div className="relative mx-auto grid w-full max-w-[1600px] grid-cols-12 gap-8 px-5 pb-10 pt-28 md:px-10 md:pb-16 wide:pb-24">
           <div className="hero-copy col-span-12 wide:col-span-6">
             {/* Experience first, as one quiet line that counts itself in. */}
             <div className="flex items-center gap-3" data-hero-item>
@@ -198,11 +276,43 @@ export default function HeroStage() {
             </div>
           </div>
 
-          {/* Mobile: the same sheet, cropped to the map collage */}
+          {/* Mobile: the same sheet cropped to the collage, with the magnifier
+              on it. The same scroll story plays here: the glass enlarges the
+              maps, grows, and opens onto clean paper. */}
           <div className="col-span-12 wide:hidden" data-hero-item>
-            <div className="relative aspect-[5/4] w-full overflow-hidden">
-              <div className="absolute inset-0 rtl:-scale-x-100">
-                <Image src={heroMaps} alt="" fill sizes="100vw" style={{ objectFit: "cover", objectPosition: "100% 50%" }} />
+            <div className="relative aspect-[5/4] w-full" aria-hidden="true">
+              <div className="m-art absolute inset-0 overflow-hidden">{mobileCollage}</div>
+              <div
+                className="m-zoom pointer-events-none invisible absolute inset-0 overflow-hidden opacity-0"
+                style={{ clipPath: `circle(var(--mr) at ${mx} ${MY})` }}
+              >
+                <div className="absolute inset-0" style={{ scale: "var(--mag)", transformOrigin: `${mx} ${MY}` }}>
+                  {mobileCollage}
+                </div>
+              </div>
+              {/* Oversized so the opening circle can cover the whole stage; the section clips it. */}
+              <div
+                className="m-paper pointer-events-none invisible absolute bg-paper opacity-0"
+                style={{
+                  left: mx,
+                  top: MY,
+                  width: "320vmax",
+                  height: "320vmax",
+                  translate: "-50% -50%",
+                  clipPath: "circle(var(--mr) at 50% 50%)",
+                }}
+              />
+              <div
+                className="loupe-ui pointer-events-none absolute z-20"
+                style={{
+                  left: mx,
+                  top: MY,
+                  width: `${LOUPE_MOBILE * 2}px`,
+                  height: `${LOUPE_MOBILE * 2}px`,
+                  transform: "translate(-50%, -50%)",
+                }}
+              >
+                {loupe}
               </div>
             </div>
           </div>
@@ -243,20 +353,7 @@ export default function HeroStage() {
         }}
         aria-hidden="true"
       >
-        <div
-          className="loupe-img absolute"
-          style={{
-            width: `${GLASS.size}%`,
-            height: `${GLASS.size}%`,
-            left: `${GLASS.left}%`,
-            top: `${GLASS.top}%`,
-            transformOrigin: `${GLASS.originX}% ${GLASS.originY}%`,
-            rotate: dir === "rtl" ? "45deg" : "-45deg",
-            scale: "var(--loupe-s)",
-          }}
-        >
-          <Image src={magnifier} alt="" fill sizes="900px" style={{ objectFit: "contain" }} priority />
-        </div>
+        {loupe}
       </div>
     </section>
   );

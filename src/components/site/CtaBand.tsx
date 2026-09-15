@@ -12,7 +12,7 @@ export default function CtaBand() {
 
   return (
     <section data-nav-theme="dark" className="on-dark bg-slate text-parchment-light">
-      <div className="mx-auto grid w-full max-w-[1600px] gap-10 px-5 py-20 md:px-10 md:py-24 lg:grid-cols-12 lg:items-end lg:gap-8">
+      <div className="mx-auto grid w-full max-w-[1600px] gap-10 px-5 py-14 md:px-10 md:py-24 lg:grid-cols-12 lg:items-end lg:gap-8">
         <div className="lg:col-span-7">
           <p className="eyebrow flex items-center gap-3 text-gold" data-reveal>
             <span className="inline-block h-px w-6 bg-current opacity-70" />

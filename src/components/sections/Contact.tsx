@@ -59,7 +59,7 @@ export default function Contact({ heading = true, extended = false, details = tr
         />
       </div>
 
-      <div className="relative mx-auto w-full max-w-[1600px] px-5 py-24 md:px-10 md:py-32">
+      <div className="relative mx-auto w-full max-w-[1600px] px-5 py-14 md:px-10 md:py-32">
         <div className="contact-card relative z-10 w-full p-6 sm:p-9 md:p-11 lg:max-w-[40rem]" data-reveal>
           {heading ? (
             <>

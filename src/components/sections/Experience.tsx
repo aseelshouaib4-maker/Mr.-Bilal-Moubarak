@@ -29,7 +29,7 @@ export default function Experience() {
       ref={root}
       id="experience"
       data-nav-theme="dark"
-      className="on-dark relative overflow-hidden bg-slate py-24 text-parchment-light [--compass-ground:var(--color-slate)] md:py-32"
+      className="on-dark relative overflow-hidden bg-slate py-16 text-parchment-light [--compass-ground:var(--color-slate)] md:py-32"
     >
       <div className="relative mx-auto w-full max-w-[1600px] px-5 md:px-10">
         {/* The line first, read on its own; the dial below it. */}

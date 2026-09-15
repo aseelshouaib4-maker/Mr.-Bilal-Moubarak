@@ -65,7 +65,7 @@ export default function Services() {
       ref={root}
       id="services"
       data-nav-theme="light"
-      className="services-overlap relative overflow-hidden py-24 md:py-28 xl:flex xl:min-h-[100svh] xl:items-center xl:py-0"
+      className="services-overlap relative overflow-hidden py-14 md:py-28 xl:flex xl:min-h-[100svh] xl:items-center xl:py-0"
     >
       <div className="relative mx-auto w-full max-w-[1600px] px-5 md:px-10">
         {/* Header runs full width so the title can hold one line. */}

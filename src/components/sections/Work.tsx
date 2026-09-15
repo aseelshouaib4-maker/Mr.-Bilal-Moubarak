@@ -22,7 +22,7 @@ export default function Work() {
   useReveals(root);
 
   return (
-    <section ref={root} id="work" data-nav-theme="light" className="relative bg-paper py-20 md:py-28">
+    <section ref={root} id="work" data-nav-theme="light" className="relative bg-paper py-14 md:py-28">
       <div className="mx-auto w-full max-w-[1600px] px-5 md:px-10">
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <div className="max-w-[40rem]">
@@ -42,13 +42,13 @@ export default function Work() {
           </div>
         </div>
 
-        <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 md:mt-14" data-stagger>
+        <ul className="mt-10 grid gap-3 sm:grid-cols-2 sm:gap-5 md:mt-14 lg:grid-cols-3" data-stagger>
           {t.work.items.map((item, i) => {
             const c = fmtCoord(item.lat, item.lon);
             return (
               <li key={i}>
-                <article className="work-card flex h-full flex-col overflow-hidden rounded-2xl border border-navy-900/10 bg-parchment-light">
-                  <div className="work-img relative aspect-[4/3] overflow-hidden border-b border-navy-900/10">
+                <article className="work-card grid h-full grid-cols-[6.5rem_1fr] overflow-hidden rounded-2xl border border-navy-900/10 bg-parchment-light sm:flex sm:flex-col">
+                  <div className="work-img relative h-full min-h-[7.5rem] overflow-hidden border-e border-navy-900/10 sm:aspect-[4/3] sm:h-auto sm:min-h-0 sm:border-b sm:border-e-0">
                     <ProceduralMap
                       seed={500 + i * 13}
                       variant={VARIANTS[i]}
@@ -56,21 +56,21 @@ export default function Work() {
                       title={item.t}
                       decorative={false}
                     />
-                    <span className="absolute start-3 top-3 rounded-full bg-parchment-light/90 px-2.5 py-1 text-[0.68rem] tracking-[0.14em] text-navy-700 tabular-nums backdrop-blur-sm">
+                    <span className="absolute start-3 top-3 hidden rounded-full bg-parchment-light/90 px-2.5 py-1 text-[0.68rem] tracking-[0.14em] text-navy-700 tabular-nums backdrop-blur-sm sm:inline">
                       {c.lat} · {c.lon}
                     </span>
                   </div>
-                  <div className="flex flex-1 flex-col p-5 md:p-6">
+                  <div className="flex min-w-0 flex-1 flex-col p-4 sm:p-5 md:p-6">
                     <p className="eyebrow text-navy-700/70">
                       {item.k} · {item.y}
                     </p>
-                    <h3 className="font-display mt-2 text-[1.2rem] leading-[1.25] text-navy-900">{item.t}</h3>
-                    <div className="mt-auto flex items-center justify-between gap-4 border-t border-navy-900/10 pt-4">
+                    <h3 className="font-display mt-1.5 text-[1.1rem] leading-[1.25] text-navy-900 sm:mt-2 sm:text-[1.2rem]">{item.t}</h3>
+                    <div className="mt-auto flex flex-wrap items-center justify-between gap-x-4 gap-y-1 pt-3 sm:border-t sm:border-navy-900/10 sm:pt-4">
                       <p className="text-[0.86rem] text-ink/75">
                         <span className="eyebrow me-2 text-navy-700/60">{t.work.roleLabel}</span>
                         {item.role}
                       </p>
-                      <Link href={ROUTES.projects} className="link-line shrink-0 text-[0.78rem] font-medium text-navy-700">
+                      <Link href={ROUTES.projects} className="link-line hidden shrink-0 text-[0.78rem] font-medium text-navy-700 sm:inline-flex">
                         {t.work.caseStudy}
                         <Arrow />
                       </Link>

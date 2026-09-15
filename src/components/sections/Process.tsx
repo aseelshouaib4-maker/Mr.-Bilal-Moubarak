@@ -218,7 +218,7 @@ export default function Process() {
       ref={root}
       id="process"
       data-nav-theme="light"
-      className="relative overflow-hidden bg-parchment-light py-24 md:py-32 lg:flex lg:h-[100svh] lg:flex-col lg:py-0"
+      className="relative overflow-hidden bg-parchment-light py-14 md:py-32 lg:flex lg:h-[100svh] lg:flex-col lg:py-0"
     >
       <div className="relative mx-auto flex w-full max-w-[1600px] flex-1 flex-col px-5 md:px-10 lg:pb-10 lg:pt-28">
         {/* Title block: heading on the left, the one-line key on the right. */}

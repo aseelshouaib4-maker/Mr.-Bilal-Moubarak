@@ -35,7 +35,7 @@ function AboutContent() {
 
       {/* The studio's story, beside the idea it rests on. */}
       <section data-nav-theme="light" className="bg-paper">
-        <div className="mx-auto grid w-full max-w-[1600px] gap-12 px-5 py-20 md:px-10 md:py-28 lg:grid-cols-12 lg:gap-8">
+        <div className="mx-auto grid w-full max-w-[1600px] gap-12 px-5 py-14 md:px-10 md:py-28 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-5">
             <Eyebrow className="text-navy-700">{a.storyLabel}</Eyebrow>
             <h2 className="font-display mt-5 text-[clamp(1.9rem,3.2vw,2.8rem)] leading-[1.12] text-navy-900" data-split>
@@ -58,7 +58,7 @@ function AboutContent() {
 
       {/* Judgement: a figure beside four decisions, set as a quiet bento. */}
       <section data-nav-theme="light" className="bg-parchment-light">
-        <div className="mx-auto w-full max-w-[1600px] px-5 py-20 md:px-10 md:py-28">
+        <div className="mx-auto w-full max-w-[1600px] px-5 py-14 md:px-10 md:py-28">
           <div className="max-w-[46rem]">
             <Eyebrow className="text-navy-700">{a.judgementLabel}</Eyebrow>
             <h2 className="font-display mt-5 text-[clamp(1.9rem,3.2vw,2.8rem)] leading-[1.12] text-navy-900" data-split>
@@ -75,7 +75,7 @@ function AboutContent() {
 
       {/* Five qualities, read across like a map's legend. */}
       <section data-nav-theme="light" className="bg-paper">
-        <div className="mx-auto w-full max-w-[1600px] px-5 py-20 md:px-10 md:py-24">
+        <div className="mx-auto w-full max-w-[1600px] px-5 py-14 md:px-10 md:py-24">
           <Eyebrow className="text-navy-700">{x.qualitiesLabel}</Eyebrow>
           <ol className="mt-10 grid border-t border-navy-900/10 sm:grid-cols-2 lg:grid-cols-5" data-stagger>
             {x.qualities.map((q, i) => (
@@ -91,7 +91,7 @@ function AboutContent() {
 
       {/* Where the experience was built, stated carefully. */}
       <section data-nav-theme="light" className="bg-paper">
-        <div className="mx-auto w-full max-w-[1600px] px-5 pb-24 md:px-10 md:pb-32">
+        <div className="mx-auto w-full max-w-[1600px] px-5 pb-16 md:px-10 md:pb-32">
           <div className="sheet grid gap-10 p-7 md:p-10 lg:grid-cols-12 lg:gap-8" data-reveal>
             <div className="lg:col-span-4">
               <p className="eyebrow text-umber-light">{x.orgsLabel}</p>
