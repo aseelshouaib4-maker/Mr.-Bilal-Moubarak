@@ -27,6 +27,8 @@ export const en = {
     stamp2: "The art & science of cartography",
     lookCloser: "Look closer",
     badgeLabel: "Years of cartography experience",
+    storyTitle: "Where experience meets precision.",
+    storyCta: "Discover our story",
     fig: "Fig. 01 — Sheet of the studio",
   },
   services: {
@@ -161,6 +163,8 @@ export const ar: Dict = {
     stamp2: "فنّ الكارتوغرافيا وعلمها",
     lookCloser: "انظر عن قرب",
     badgeLabel: "عاماً من الخبرة في الكارتوغرافيا",
+    storyTitle: "حيث تلتقي الخبرة بالدقة.",
+    storyCta: "اكتشف قصتنا",
     fig: "شكل 01 — لوحة الستوديو",
   },
   services: {

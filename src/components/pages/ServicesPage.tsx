@@ -21,6 +21,7 @@ function ServicesContent() {
         eyebrow={s.eyebrow}
         title={s.title}
         body={s.body}
+        image="/images/header-services.jpg"
       />
 
       {/* The six services as an index: number, mark, name, what it covers. */}

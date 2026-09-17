@@ -5,6 +5,8 @@ import { gsap, SplitText, useGSAP, prefersReducedMotion } from "@/lib/gsap";
 import { useLang } from "@/lib/i18n/LanguageProvider";
 import { useMotionReady } from "@/components/MotionReady";
 import Image from "next/image";
+import Link from "next/link";
+import { ROUTES } from "@/lib/site";
 import CountUp from "@/components/ui/CountUp";
 import heroMaps from "@/assets/hero-maps.png";
 import magnifier from "@/assets/magnifier.png";
@@ -87,10 +89,11 @@ export default function HeroStage() {
             scrollTrigger: {
               trigger: stage.current,
               start: "top top",
-              // The reveal takes the first ~60vh; the last 100vh of the pin is
-              // plain paper, which Services scrolls up onto (it overlaps the
-              // stage by one viewport, see .services-overlap).
-              end: "+=162%",
+              // Timeline units are viewport heights of scroll. The reveal takes
+              // the first ~0.7; the studio line holds on the paper, and Services
+              // starts rising at 1.12, onto the last 100vh of plain paper
+              // (it overlaps the stage by one viewport, see .services-overlap).
+              end: "+=212%",
               pin: true,
               scrub: 1,
               invalidateOnRefresh: true,
@@ -114,9 +117,12 @@ export default function HeroStage() {
           // page is fully open, so it never sits on top of it
           .to(q(".hero-art-fade"), { autoAlpha: 0, duration: 0.2, ease: "power2.in" }, 0.42)
           .to(q(".loupe-img"), { autoAlpha: 0, duration: 0.17, ease: "power2.in" }, 0.45)
-          // Hold on paper for the rest of the pin. Sized so Services starts
-          // rising (0.62vh in) just as the magnifier finishes leaving.
-          .to({}, { duration: 0.85 });
+          // On the open paper, the studio line and the way to its story...
+          .fromTo(q(".hero-story"), { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 0.3, ease: "power2.out" }, 0.7)
+          // ...which lifts away as the Services heading comes up beneath it.
+          .to(q(".hero-story"), { autoAlpha: 0, y: -60, duration: 0.25, ease: "power2.in" }, 1.22)
+          // Hold on paper for the rest of the pin.
+          .to({}, { duration: 0.01 }, 2.11);
 
         // Cursor parallax on the paper composition.
         const setters = q<HTMLElement>("[data-depth]").map((el) => ({
@@ -156,7 +162,8 @@ export default function HeroStage() {
               // Pin once the whole collage is on screen: at the top when the
               // hero fits the viewport, otherwise when its bottom arrives.
               start: () => (el.offsetHeight > window.innerHeight ? "bottom bottom" : "top top"),
-              end: "+=90%",
+              // Units are viewport heights of scroll, as on wide screens.
+              end: "+=180%",
               pin: true,
               scrub: 1,
               invalidateOnRefresh: true,
@@ -169,13 +176,16 @@ export default function HeroStage() {
           .to(q(".m-paper"), { autoAlpha: 1, duration: 0.26, ease: "power1.inOut" }, 0.26)
           .to(q(".m-art"), { autoAlpha: 0, duration: 0.2, ease: "power2.in" }, 0.42)
           .to(q(".loupe-img"), { autoAlpha: 0, duration: 0.17, ease: "power2.in" }, 0.45)
-          .to({}, { duration: 0.1 });
+          .fromTo(q(".hero-story"), { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.25, ease: "power2.out" }, 0.7)
+          // lifts away as Services arrives (1.2 in: the pin less the overlap)
+          .to(q(".hero-story"), { autoAlpha: 0, y: -50, duration: 0.25, ease: "power2.in" }, 1.2)
+          .to({}, { duration: 0.01 }, 1.79);
 
         // Services rises onto the opened paper instead of after a blank screen.
         // Set as a variable, not on Services' own style: a pin restores the
         // style attribute it saved when it reverts, which would wipe it.
         const root = document.documentElement;
-        root.style.setProperty("--hero-overlap", `${Math.round(window.innerHeight * 0.35)}px`);
+        root.style.setProperty("--hero-overlap", `${Math.round(window.innerHeight * 0.6)}px`);
 
         return () => {
           root.style.removeProperty("--hero-overlap");
@@ -204,6 +214,19 @@ export default function HeroStage() {
     </div>
   );
   const glassClip = "circle(var(--r) at var(--cx) var(--cy))";
+
+  // Soft edges for the mobile collage: fades top and bottom, and on the side
+  // away from the maps (the collage is mirrored under RTL, so the fade is too).
+  const fadeMask = [
+    "linear-gradient(to bottom, transparent 0%, #000 22%, #000 78%, transparent 100%)",
+    `linear-gradient(${dir === "rtl" ? "to left" : "to right"}, transparent 0%, #000 30%)`,
+  ].join(", ");
+  const edgeFade: CSSProperties = {
+    maskImage: fadeMask,
+    WebkitMaskImage: fadeMask,
+    maskComposite: "intersect",
+    WebkitMaskComposite: "source-in",
+  };
 
   const mobileCollage = (
     <div className="absolute inset-0 rtl:-scale-x-100">
@@ -280,11 +303,14 @@ export default function HeroStage() {
               on it. The same scroll story plays here: the glass enlarges the
               maps, grows, and opens onto clean paper. */}
           <div className="col-span-12 wide:hidden" data-hero-item>
-            <div className="relative aspect-[5/4] w-full" aria-hidden="true">
-              <div className="m-art absolute inset-0 overflow-hidden">{mobileCollage}</div>
+            {/* Runs to the screen edges and fades into the paper, so the sheet has no hard frame. */}
+            <div className="relative -mx-5 aspect-[5/4] md:-mx-10" aria-hidden="true">
+              <div className="m-art absolute inset-0 overflow-hidden" style={edgeFade}>
+                {mobileCollage}
+              </div>
               <div
                 className="m-zoom pointer-events-none invisible absolute inset-0 overflow-hidden opacity-0"
-                style={{ clipPath: `circle(var(--mr) at ${mx} ${MY})` }}
+                style={{ clipPath: `circle(var(--mr) at ${mx} ${MY})`, ...edgeFade }}
               >
                 <div className="absolute inset-0" style={{ scale: "var(--mag)", transformOrigin: `${mx} ${MY}` }}>
                   {mobileCollage}
@@ -354,6 +380,22 @@ export default function HeroStage() {
         aria-hidden="true"
       >
         {loupe}
+      </div>
+
+      {/* Once the paper is open: the studio's line and the way to its story. */}
+      {/* Centred on the visible screen: the stage pins by its bottom edge when it is taller than the viewport. */}
+      <div
+        className="hero-story invisible absolute inset-x-0 bottom-0 z-30 flex items-center justify-center px-5 opacity-0"
+        style={{ height: "min(100svh, 100%)" }}
+      >
+        <div className="flex max-w-[46rem] flex-col items-center text-center">
+          <span className="h-px w-10 bg-gold" aria-hidden="true" />
+          <p className="font-display mt-6 text-[clamp(2.1rem,4.6vw,4.2rem)] leading-[1.08] text-navy-900">{t.hero.storyTitle}</p>
+          <Link href={ROUTES.about} className="btn btn-solid mt-8">
+            {t.hero.storyCta}
+            <span className="btn-dot" aria-hidden="true" />
+          </Link>
+        </div>
       </div>
     </section>
   );

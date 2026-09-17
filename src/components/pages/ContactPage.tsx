@@ -74,6 +74,7 @@ function Intro() {
         eyebrow={c.eyebrow}
         title={c.title}
         body={c.body}
+        image="/images/header-contact.jpg"
       />
 
       <section data-nav-theme="light" className="bg-paper">

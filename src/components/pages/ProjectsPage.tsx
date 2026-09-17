@@ -42,6 +42,7 @@ function ProjectsContent() {
         eyebrow={p.eyebrow}
         title={p.title}
         body={p.body}
+        image="/images/header-projects.jpg"
       />
 
       <section data-nav-theme="light" className="bg-paper">
