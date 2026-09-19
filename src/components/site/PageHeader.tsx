@@ -9,7 +9,7 @@ type Props = {
   eyebrow: string;
   title: string[];
   body: string;
-  /** Optional banner image set behind the title, e.g. "/images/about-banner.jpg". */
+  /** Optional banner image set behind the title, e.g. "/images/banner-about.jpg". */
   image?: string;
   children?: ReactNode;
 };
@@ -75,8 +75,7 @@ export default function PageHeader({ eyebrow, title, body, image, children }: Pr
         }`}
       >
         <div className="max-w-[60rem]">
-          <p className={`eyebrow flex items-center gap-3 ${banner ? "text-parchment-light/80" : "text-navy-700"}`} data-reveal>
-            <span className="h-px w-6 shrink-0 bg-gold" aria-hidden="true" />
+          <p className={`kicker ${banner ? "text-parchment-light/85" : "text-navy-700"}`} data-reveal>
             {eyebrow}
           </p>
           <h1

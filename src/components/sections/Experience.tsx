@@ -34,7 +34,7 @@ export default function Experience() {
       <div className="relative mx-auto w-full max-w-[1600px] px-5 md:px-10">
         {/* The line first, read on its own; the dial below it. */}
         <div className="mx-auto flex max-w-[52rem] flex-col items-center text-center">
-          <p className="eyebrow text-mist/70" data-reveal>
+          <p className="kicker text-mist/80" data-reveal>
             {t.experience.qualitiesLabel}
           </p>
           <TypewriterQuote

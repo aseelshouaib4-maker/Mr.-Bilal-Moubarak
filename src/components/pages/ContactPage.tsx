@@ -61,7 +61,7 @@ function ChannelCard({ icon, label, children, note }: { icon: ReactNode; label: 
   );
 }
 
-/** Header, direct lines. Each block runs its own reveals; the enquiry sheet runs its own too. */
+/** Header, common questions, direct lines. The enquiry sheet runs its own reveals. */
 function Intro() {
   const { t } = useLang();
   const c = t.pages.contact;
@@ -74,8 +74,31 @@ function Intro() {
         eyebrow={c.eyebrow}
         title={c.title}
         body={c.body}
-        image="/images/header-contact.jpg"
+        image="/images/banner-contact.jpg"
       />
+
+      {/* The common questions first, so most are answered before anyone writes. */}
+      <section data-nav-theme="light" className="bg-paper">
+        <div className="mx-auto grid w-full max-w-[1600px] gap-10 px-5 pt-14 md:px-10 md:pt-24 lg:grid-cols-12 lg:gap-8">
+          <div className="lg:col-span-4">
+            <Eyebrow className="text-navy-700">{c.faqLabel}</Eyebrow>
+            <h2 className="font-display mt-4 text-[clamp(1.9rem,3.2vw,2.8rem)] leading-[1.12] text-navy-900" data-split>
+              <Lines lines={c.faqTitle} />
+            </h2>
+          </div>
+          <div className="lg:col-span-7 lg:col-start-6" data-reveal="0.1">
+            {c.faq.map((item, i) => (
+              <details key={i} className="faq group border-t border-navy-900/10 last:border-b" open={i === 0}>
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-[1.05rem] text-navy-900">
+                  <span className="font-display text-[1.2rem] leading-snug">{item.q}</span>
+                  <span className="faq-mark" aria-hidden="true" />
+                </summary>
+                <p className="max-w-[40rem] pb-6 text-[0.97rem] leading-relaxed text-ink/70">{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section data-nav-theme="light" className="bg-paper">
         <div className="mx-auto w-full max-w-[1600px] px-5 pt-14 md:px-10 md:pt-20">
@@ -126,89 +149,11 @@ function Intro() {
   );
 }
 
-/** How to brief the studio, what follows, and the common questions. */
-function Guidance() {
-  const { t } = useLang();
-  const c = t.pages.contact;
-  const root = useRef<HTMLDivElement>(null);
-  useReveals(root);
-
-  return (
-    <div ref={root}>
-      {/* The brief, in five points. */}
-      <section data-nav-theme="light" className="bg-parchment-light">
-        <div className="mx-auto grid w-full max-w-[1600px] gap-12 px-5 py-14 md:px-10 md:py-28 lg:grid-cols-12 lg:gap-8">
-          <div className="lg:col-span-5">
-            <Eyebrow className="text-navy-700">{c.briefLabel}</Eyebrow>
-            <h2 className="font-display mt-5 text-[clamp(1.9rem,3.2vw,2.8rem)] leading-[1.12] text-navy-900" data-split>
-              <Lines lines={c.briefTitle} />
-            </h2>
-            <p className="mt-5 max-w-[26rem] text-[1rem] leading-relaxed text-ink/70" data-reveal="0.1">
-              {c.briefBody}
-            </p>
-          </div>
-          <ol className="lg:col-span-6 lg:col-start-7" data-stagger>
-            {c.brief.map((item, i) => (
-              <li key={i} className="grid grid-cols-[2.75rem_1fr] items-baseline gap-4 border-t border-navy-900/10 py-5 last:border-b">
-                <span className="font-display text-[1.3rem] leading-none text-gold tabular-nums">{String(i + 1).padStart(2, "0")}</span>
-                <div>
-                  <h3 className="font-display text-[1.2rem] leading-tight text-navy-900">{item.k}</h3>
-                  <p className="mt-1.5 text-[0.95rem] leading-relaxed text-ink/70">{item.d}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* What follows an enquiry. */}
-      <section data-nav-theme="light" className="bg-paper">
-        <div className="mx-auto w-full max-w-[1600px] px-5 py-14 md:px-10 md:py-24">
-          <Eyebrow className="text-navy-700">{c.nextLabel}</Eyebrow>
-          <ol className="mt-10 grid gap-4 md:grid-cols-3" data-stagger>
-            {c.next.map((step, i) => (
-              <li key={i} className="sheet relative overflow-hidden p-7">
-                <span className="font-display text-[1.6rem] leading-none text-gold tabular-nums">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="font-display mt-5 text-[1.3rem] leading-snug text-navy-900">{step.t}</h3>
-                <p className="mt-2 text-[0.94rem] leading-relaxed text-ink/70">{step.d}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* Common questions. */}
-      <section data-nav-theme="light" className="bg-paper">
-        <div className="mx-auto grid w-full max-w-[1600px] gap-12 px-5 pb-16 md:px-10 md:pb-32 lg:grid-cols-12 lg:gap-8">
-          <div className="lg:col-span-4">
-            <Eyebrow className="text-navy-700">{c.faqLabel}</Eyebrow>
-            <h2 className="font-display mt-5 text-[clamp(1.9rem,3.2vw,2.8rem)] leading-[1.12] text-navy-900" data-split>
-              <Lines lines={c.faqTitle} />
-            </h2>
-          </div>
-          <div className="lg:col-span-7 lg:col-start-6" data-reveal="0.1">
-            {c.faq.map((item, i) => (
-              <details key={i} className="faq group border-t border-navy-900/10 last:border-b" open={i === 0}>
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-[1.05rem] text-navy-900">
-                  <span className="font-display text-[1.2rem] leading-snug">{item.q}</span>
-                  <span className="faq-mark" aria-hidden="true" />
-                </summary>
-                <p className="max-w-[40rem] pb-6 text-[0.97rem] leading-relaxed text-ink/70">{item.a}</p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
-    </div>
-  );
-}
-
 export default function ContactPage() {
   return (
     <SiteShell>
       <Intro />
       <Contact heading={false} extended details={false} />
-      <Guidance />
     </SiteShell>
   );
 }

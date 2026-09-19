@@ -21,8 +21,7 @@ export function Monogram({ className = "" }: { className?: string }) {
 
 export function Eyebrow({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
-    <p className={`eyebrow flex items-center gap-3 ${className}`} data-reveal>
-      <span className="inline-block h-px w-6 bg-current opacity-60" />
+    <p className={`kicker ${className}`} data-reveal>
       {children}
     </p>
   );

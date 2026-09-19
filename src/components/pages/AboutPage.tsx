@@ -31,7 +31,7 @@ function AboutContent() {
 
   return (
     <div ref={root}>
-      <PageHeader eyebrow={a.eyebrow} title={a.title} body={a.body} image="/images/header-about.jpg" />
+      <PageHeader eyebrow={a.eyebrow} title={a.title} body={a.body} image="/images/banner-about.jpg" />
 
       {/* The studio's story, beside the idea it rests on. */}
       <section data-nav-theme="light" className="bg-paper">

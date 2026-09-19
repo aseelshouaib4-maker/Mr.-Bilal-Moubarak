@@ -19,7 +19,7 @@ function ProcessContent() {
         eyebrow={pr.eyebrow}
         title={pr.title}
         body={pr.body}
-        image="/images/header-process.jpg"
+        image="/images/banner-process.jpg"
       />
 
       <section data-nav-theme="light" className="bg-paper">

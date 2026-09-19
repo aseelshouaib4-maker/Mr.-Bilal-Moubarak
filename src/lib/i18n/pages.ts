@@ -10,8 +10,8 @@ export const pagesEn = {
   common: {
     legend: "Legend",
     ctaEyebrow: "Start a project",
-    ctaTitle: ["Have a project", "in mind?"],
-    ctaBody: "Tell us about the geography, the data and the audience. We reply with a cartographic approach, not a template.",
+    ctaTitle: ["Have a project in mind?"],
+    ctaBody: "Tell us the place, the data and the audience.",
     ctaButton: "Start a project",
     footerExplore: "Explore",
     footerContact: "Contact",
@@ -19,23 +19,23 @@ export const pagesEn = {
 
   about: {
     eyebrow: "About the studio",
-    title: ["The art & science", "of cartography."],
-    body: "Bilal Moubarak Cartography Studio is an independent, specialised studio founded on more than 34 years of professional experience in maps and cartography.",
+    title: ["Art & science of maps."],
+    body: "An independent studio built on 34 years of cartography.",
     facts: [
       { k: "34+", v: "Years in professional cartography" },
       { k: "Head", v: "Of a cartography department" },
       { k: "Beirut", v: "Independent studio" },
     ],
     storyLabel: "The studio",
-    storyTitle: ["A continuation of", "accumulated experience."],
+    storyTitle: ["34 years, one practice."],
     story: [
       "The studio is not simply a map-design service. It carries forward a career that includes many years leading a cartography department and overseeing the development and production of a wide range of cartographic projects.",
       "That experience now meets modern GIS technology and digital production, bringing geographic knowledge, scientific accuracy, editorial thinking and visual design to every sheet.",
     ],
     quote: "A map is not simply a drawing that shows locations. It is a means of organising information, understanding places and communicating knowledge.",
-    judgementLabel: "What sets the studio apart",
-    judgementTitle: ["Cartographic judgement,", "not just software."],
-    judgementBody: "Software can help produce maps. Professional cartography depends on the decisions made at every stage.",
+    judgementLabel: "What sets us apart",
+    judgementTitle: ["Judgement, not software."],
+    judgementBody: "Good maps come from good decisions.",
     judgementFigure: "Years of decisions behind every map",
     visual: {
       layers: ["Relief", "Rivers", "Place names", "Decoration"],
@@ -46,9 +46,9 @@ export const pagesEn = {
       gis: "GIS",
     },
     judgement: [
-      { t: "What to show, and what to leave out", d: "Selecting the information a map needs, and removing everything that competes with it." },
+      { t: "What to show", d: "Selecting the information a map needs, and removing everything that competes with it." },
       { t: "Scale & projection", d: "Choosing the frame that keeps the geography true to its purpose." },
-      { t: "Symbols, colour & hierarchy", d: "A visual language the reader understands at a glance." },
+      { t: "Symbols & colour", d: "A visual language the reader understands at a glance." },
       { t: "Heritage meets technology", d: "Decades of cartographic practice, produced with modern GIS and digital methods." },
     ],
     sectorsNote:
@@ -57,45 +57,45 @@ export const pagesEn = {
 
   services: {
     eyebrow: "Services",
-    title: ["Customised", "cartographic solutions."],
-    body: "We do not offer ready-made map templates. Each map is developed around the project's purpose, its information and the audience it is intended to serve.",
+    title: ["Maps made to measure."],
+    body: "Every map is built around its purpose and audience.",
     countLabel: "Services",
     formatLabel: "Formats",
     formats: "Print · Digital · Multilingual",
     items: [
       {
-        t: "Atlas Development & Publishing Cartography",
-        d: "Development of national, educational, thematic and reference atlases, from structure and content planning to final production.",
+        t: "Atlases",
+        d: "National, educational and reference atlases, from plan to print.",
         tags: ["National atlases", "Reference atlases", "Thematic atlases"],
       },
       {
-        t: "Educational Cartography",
-        d: "Maps and geographic content for textbooks, curricula, educational atlases, publishers and educational institutions.",
+        t: "Educational maps",
+        d: "Maps for textbooks, curricula and school atlases.",
         tags: ["Textbook maps", "School atlases", "Wall maps"],
       },
       {
-        t: "Thematic & Data-Driven Mapping",
-        d: "Statistical, demographic, economic and environmental data transformed into maps that make complex information easier to understand.",
+        t: "Thematic maps",
+        d: "Complex data turned into maps anyone can read.",
         tags: ["Statistical", "Demographic", "Environmental"],
       },
       {
-        t: "Tourism & Destination Mapping",
-        d: "Maps for cities, regions, tourism destinations and the organisations that promote them.",
+        t: "Tourism maps",
+        d: "Maps for cities, regions and destinations.",
         tags: ["City maps", "Regional maps", "Visitor guides"],
       },
       {
-        t: "Custom Cartographic Projects",
-        d: "Specialised cartographic solutions designed around the nature, audience and purpose of each project.",
+        t: "Custom projects",
+        d: "Cartography shaped around one brief.",
         tags: ["Bespoke briefs", "Print & digital", "Multilingual"],
       },
       {
-        t: "GIS & Geographic Data Services",
-        d: "Preparation, processing and organisation of the geographic information required for professional cartographic production.",
+        t: "GIS & data",
+        d: "Geographic data prepared for production.",
         tags: ["Data preparation", "Processing", "Layer structure"],
       },
     ],
-    audienceLabel: "Who the studio works with",
-    audienceTitle: ["Whether you know cartography", "or are just starting."],
+    audienceLabel: "Who we work with",
+    audienceTitle: ["Expert or just starting."],
     audience: [
       {
         k: "You know what you need",
@@ -109,9 +109,9 @@ export const pagesEn = {
   },
 
   projects: {
-    eyebrow: "Selected work & professional experience",
-    title: ["Selected cartographic work", "from 34+ years of experience."],
-    body: "A careful selection rather than a large collection. Some projects were produced during a previous role as Head of a Cartography Department; each one names the role held.",
+    eyebrow: "Our work",
+    title: ["34 years of maps."],
+    body: "A careful selection, each with the role held.",
     filters: {
       all: "All work",
       atlas: "Atlases",
@@ -146,25 +146,25 @@ export const pagesEn = {
 
   process: {
     eyebrow: "Method",
-    title: ["Mapmaking begins with", "understanding, not drawing."],
-    body: "Professional cartography does not begin with graphic design. It begins with understanding the problem the map is intended to solve.",
+    title: ["Understand first, then draw."],
+    body: "Every map starts with the problem it must solve.",
     stageLabel: "Stage",
     stagesLabel: "Stages",
     steps: [
-      { t: "Project understanding & cartographic brief", d: "Understanding the project's objective, target audience, geographic scope and the intended use of the final product.", points: ["Objective & audience", "Geographic scope", "Intended use"] },
-      { t: "Data research, collection & evaluation", d: "Gathering the geographic and statistical data and reference materials required, and evaluating their accuracy and relevance.", points: ["Sources & references", "Accuracy", "Relevance"] },
-      { t: "Geographic & cartographic planning", d: "Determining scale, projection, geographic extent, information hierarchy and the overall structure of the map.", points: ["Scale & projection", "Extent", "Hierarchy"] },
-      { t: "Data processing & GIS preparation", d: "Organising, processing and preparing geographic data for cartographic production.", points: ["Cleaning", "Layer structure", "GIS preparation"] },
-      { t: "Cartographic design", d: "Developing the visual language of the map: symbols, colour, typography, hierarchy and the presentation of geographic information.", points: ["Symbols", "Colour & type", "Visual hierarchy"] },
-      { t: "Cartographic editing & quality control", d: "Reviewing geographic accuracy, place names, information, consistency, readability and visual balance.", points: ["Place names", "Consistency", "Readability"] },
-      { t: "Final production & delivery", d: "Preparing the final files to the required specifications for print, digital publishing or other intended uses.", points: ["Print", "Digital publishing", "Specifications"] },
+      { t: "The brief", d: "Understanding the project's objective, target audience, geographic scope and the intended use of the final product.", points: ["Objective & audience", "Geographic scope", "Intended use"] },
+      { t: "Data research", d: "Gathering the geographic and statistical data and reference materials required, and evaluating their accuracy and relevance.", points: ["Sources & references", "Accuracy", "Relevance"] },
+      { t: "Planning", d: "Determining scale, projection, geographic extent, information hierarchy and the overall structure of the map.", points: ["Scale & projection", "Extent", "Hierarchy"] },
+      { t: "GIS preparation", d: "Organising, processing and preparing geographic data for cartographic production.", points: ["Cleaning", "Layer structure", "GIS preparation"] },
+      { t: "Design", d: "Developing the visual language of the map: symbols, colour, typography, hierarchy and the presentation of geographic information.", points: ["Symbols", "Colour & type", "Visual hierarchy"] },
+      { t: "Editing & checks", d: "Reviewing geographic accuracy, place names, information, consistency, readability and visual balance.", points: ["Place names", "Consistency", "Readability"] },
+      { t: "Delivery", d: "Preparing the final files to the required specifications for print, digital publishing or other intended uses.", points: ["Print", "Digital publishing", "Specifications"] },
     ],
   },
 
   contact: {
     eyebrow: "Contact",
-    title: ["Let's start your next", "cartographic project."],
-    body: "Tell us about the geography, the data and the people the map is for. We reply with an approach, not a template.",
+    title: ["Let's talk maps."],
+    body: "Tell us about your map. We reply with an approach.",
     hoursLabel: "Studio hours",
     hours: "Mon – Fri · 9:00 – 18:00 (GMT+2)",
     locationLabel: "Location",
@@ -172,12 +172,6 @@ export const pagesEn = {
     orgPlaceholder: "Publisher, ministry, university…",
     typePlaceholder: "Select a project type",
     optional: "optional",
-    nextLabel: "What happens next",
-    next: [
-      { t: "We read your brief", d: "Every enquiry is read by Bilal Moubarak himself." },
-      { t: "A short conversation", d: "We clarify the purpose, the audience, the scope and the data." },
-      { t: "A cartographic approach", d: "You receive a proposed approach, timeline and deliverables." },
-    ],
     channelsLabel: "Direct lines",
     channels: {
       email: { k: "Email", d: "Replies within two working days." },
@@ -185,16 +179,6 @@ export const pagesEn = {
       visit: { k: "Studio visits", v: "Beirut, Lebanon", d: "By appointment." },
       follow: { k: "Follow", d: "Work in progress and new sheets." },
     },
-    briefLabel: "Writing your brief",
-    briefTitle: ["A good map starts", "with a clear brief."],
-    briefBody: "You do not need to know cartography. These five points help us understand the project from the first message.",
-    brief: [
-      { k: "Purpose", d: "What the map should help people understand or do." },
-      { k: "Audience", d: "Who will read it: students, specialists, travellers or the public." },
-      { k: "Geography", d: "The area covered and the level of detail it needs." },
-      { k: "Material", d: "Data, references or existing maps you already have." },
-      { k: "Format & timing", d: "Print, digital or both, with sizes and deadlines." },
-    ],
     faqLabel: "Questions",
     faqTitle: ["Before you write."],
     faq: [
@@ -213,8 +197,8 @@ export const pagesAr: PagesDict = {
   common: {
     legend: "مفتاح الخريطة",
     ctaEyebrow: "ابدأ مشروعك",
-    ctaTitle: ["هل لديك مشروع", "في ذهنك؟"],
-    ctaBody: "أخبرنا عن الجغرافيا والبيانات والجمهور، ونردّ بمقاربة كارتوغرافية لا بقالب جاهز.",
+    ctaTitle: ["هل لديك مشروع في ذهنك؟"],
+    ctaBody: "أخبرنا عن المكان والبيانات والجمهور.",
     ctaButton: "ابدأ مشروعك",
     footerExplore: "استكشف",
     footerContact: "تواصل",
@@ -222,23 +206,23 @@ export const pagesAr: PagesDict = {
 
   about: {
     eyebrow: "عن الستوديو",
-    title: ["فنّ الكارتوغرافيا", "وعلمها."],
-    body: "ستوديو بلال مبارك للخرائط ستوديو مستقل ومتخصّص، يقوم على أكثر من 34 عاماً من الخبرة المهنية في الخرائط والكارتوغرافيا.",
+    title: ["فنّ الخرائط وعلمها."],
+    body: "ستوديو مستقل يقوم على 34 عاماً من الكارتوغرافيا.",
     facts: [
       { k: "+34", v: "عاماً في الكارتوغرافيا المهنية" },
       { k: "رئيس", v: "قسم للخرائط سابقاً" },
       { k: "بيروت", v: "ستوديو مستقل" },
     ],
     storyLabel: "الستوديو",
-    storyTitle: ["امتداد لخبرة", "تراكمت عبر السنين."],
+    storyTitle: ["34 عاماً، ممارسة واحدة."],
     story: [
       "الستوديو ليس مجرد خدمة لتصميم الخرائط، بل هو امتداد لمسيرة مهنية تضمّنت سنوات طويلة في قيادة قسم للخرائط والإشراف على تطوير وإنتاج مجموعة واسعة من المشاريع الكارتوغرافية.",
       "تلتقي هذه الخبرة اليوم بتقنيات نظم المعلومات الجغرافية والإنتاج الرقمي، لتجمع المعرفة الجغرافية والدقة العلمية والتفكير التحريري والتصميم البصري في كل لوحة.",
     ],
     quote: "الخريطة ليست مجرد رسم يُظهر المواقع، بل وسيلة لتنظيم المعلومات وفهم الأماكن ونقل المعرفة.",
-    judgementLabel: "ما يميّز الستوديو",
-    judgementTitle: ["حكم كارتوغرافي،", "لا مجرد برمجيات."],
-    judgementBody: "قد تساعد البرمجيات في إنتاج الخرائط، لكن الكارتوغرافيا المهنية تعتمد على القرارات المتّخذة في كل مرحلة.",
+    judgementLabel: "ما يميّزنا",
+    judgementTitle: ["حكم خبير، لا برمجيات."],
+    judgementBody: "الخرائط الجيدة تصنعها القرارات الجيدة.",
     judgementFigure: "عاماً من القرارات خلف كل خريطة",
     visual: {
       layers: ["التضاريس", "الأنهار", "أسماء الأماكن", "الزخرفة"],
@@ -249,9 +233,9 @@ export const pagesAr: PagesDict = {
       gis: "نظم المعلومات",
     },
     judgement: [
-      { t: "ما يُعرض وما يُحذف", d: "اختيار المعلومات التي تحتاجها الخريطة، وإزالة كل ما يزاحمها." },
+      { t: "ما يُعرض", d: "اختيار المعلومات التي تحتاجها الخريطة، وإزالة كل ما يزاحمها." },
       { t: "المقياس والإسقاط", d: "اختيار الإطار الذي يحفظ صدق الجغرافيا وفق هدفها." },
-      { t: "الرموز والألوان والتسلسل", d: "لغة بصرية يفهمها القارئ من النظرة الأولى." },
+      { t: "الرموز والألوان", d: "لغة بصرية يفهمها القارئ من النظرة الأولى." },
       { t: "التراث يلتقي بالتقنية", d: "عقود من الممارسة الكارتوغرافية، تُنتَج بأدوات نظم المعلومات والأساليب الرقمية الحديثة." },
     ],
     sectorsNote:
@@ -260,45 +244,45 @@ export const pagesAr: PagesDict = {
 
   services: {
     eyebrow: "الخدمات",
-    title: ["حلول كارتوغرافية", "مصمّمة خصيصاً."],
-    body: "لا نقدّم قوالب خرائط جاهزة. تُطوَّر كل خريطة حول هدف المشروع ومعلوماته والجمهور الذي تخدمه.",
+    title: ["خرائط على المقاس."],
+    body: "تُبنى كل خريطة حول هدفها وجمهورها.",
     countLabel: "خدمات",
     formatLabel: "الصيغ",
     formats: "طباعة · رقمي · متعدد اللغات",
     items: [
       {
-        t: "تطوير الأطالس وكارتوغرافيا النشر",
-        d: "تطوير الأطالس الوطنية والتعليمية والموضوعية والمرجعية، من تخطيط البنية والمحتوى إلى الإنتاج النهائي.",
+        t: "الأطالس",
+        d: "أطالس وطنية وتعليمية ومرجعية، من التخطيط إلى الطباعة.",
         tags: ["أطالس وطنية", "أطالس مرجعية", "أطالس موضوعية"],
       },
       {
-        t: "الكارتوغرافيا التعليمية",
-        d: "خرائط ومحتوى جغرافي للكتب المدرسية والمناهج والأطالس التعليمية ودور النشر والمؤسسات التعليمية.",
+        t: "الخرائط التعليمية",
+        d: "خرائط للكتب المدرسية والمناهج والأطالس المدرسية.",
         tags: ["خرائط الكتب", "أطالس مدرسية", "خرائط جدارية"],
       },
       {
-        t: "الخرائط الموضوعية والقائمة على البيانات",
-        d: "تحويل البيانات الإحصائية والديموغرافية والاقتصادية والبيئية إلى خرائط تجعل المعلومات المعقّدة أسهل فهماً.",
+        t: "الخرائط الموضوعية",
+        d: "بيانات معقّدة تتحوّل إلى خرائط سهلة القراءة.",
         tags: ["إحصائية", "ديموغرافية", "بيئية"],
       },
       {
-        t: "خرائط السياحة والوجهات",
-        d: "خرائط للمدن والمناطق والوجهات السياحية والجهات التي تروّج لها.",
+        t: "الخرائط السياحية",
+        d: "خرائط للمدن والمناطق والوجهات.",
         tags: ["خرائط المدن", "خرائط إقليمية", "أدلة الزوّار"],
       },
       {
-        t: "مشاريع كارتوغرافية مخصّصة",
-        d: "حلول كارتوغرافية متخصّصة تُصمَّم وفق طبيعة كل مشروع وجمهوره وهدفه.",
+        t: "مشاريع مخصّصة",
+        d: "كارتوغرافيا تُصمَّم حول موجز واحد.",
         tags: ["موجز مخصّص", "طباعة ورقمي", "متعدد اللغات"],
       },
       {
-        t: "خدمات نظم المعلومات والبيانات الجغرافية",
-        d: "إعداد ومعالجة وتنظيم المعلومات الجغرافية اللازمة للإنتاج الكارتوغرافي المهني.",
+        t: "نظم المعلومات والبيانات",
+        d: "بيانات جغرافية مُعدّة للإنتاج.",
         tags: ["إعداد البيانات", "المعالجة", "بنية الطبقات"],
       },
     ],
-    audienceLabel: "مع من يعمل الستوديو",
-    audienceTitle: ["سواء كنت تعرف الكارتوغرافيا", "أو تبدأ للتوّ."],
+    audienceLabel: "مع من نعمل",
+    audienceTitle: ["خبيراً كنت أو مبتدئاً."],
     audience: [
       {
         k: "تعرف ما تحتاجه",
@@ -312,9 +296,9 @@ export const pagesAr: PagesDict = {
   },
 
   projects: {
-    eyebrow: "أعمال مختارة وخبرة مهنية",
-    title: ["أعمال كارتوغرافية مختارة", "من أكثر من 34 عاماً من الخبرة."],
-    body: "اختيار مدروس لا مجموعة كبيرة. أُنتج بعض هذه المشاريع خلال العمل رئيساً لقسم الخرائط سابقاً، ويُذكر في كل منها الدور الذي أُدّي.",
+    eyebrow: "أعمالنا",
+    title: ["34 عاماً من الخرائط."],
+    body: "اختيار مدروس، مع الدور في كل مشروع.",
     filters: {
       all: "كل الأعمال",
       atlas: "أطالس",
@@ -349,25 +333,25 @@ export const pagesAr: PagesDict = {
 
   process: {
     eyebrow: "المنهجية",
-    title: ["صناعة الخريطة تبدأ", "بالفهم، لا بالرسم."],
-    body: "لا تبدأ الكارتوغرافيا المهنية بالتصميم الغرافيكي، بل بفهم المشكلة التي يُراد للخريطة أن تحلّها.",
+    title: ["الفهم أولاً، ثم الرسم."],
+    body: "تبدأ كل خريطة بالمشكلة التي عليها حلّها.",
     stageLabel: "المرحلة",
     stagesLabel: "مراحل",
     steps: [
-      { t: "فهم المشروع والموجز الكارتوغرافي", d: "فهم هدف المشروع والجمهور المستهدف والنطاق الجغرافي والاستخدام المقصود للمنتج النهائي.", points: ["الهدف والجمهور", "النطاق الجغرافي", "الاستخدام المقصود"] },
-      { t: "بحث البيانات وجمعها وتقييمها", d: "جمع البيانات الجغرافية والإحصائية والمراجع المطلوبة، وتقييم دقتها وملاءمتها.", points: ["المصادر والمراجع", "الدقة", "الملاءمة"] },
-      { t: "التخطيط الجغرافي والكارتوغرافي", d: "تحديد المقياس والإسقاط والامتداد الجغرافي وتسلسل المعلومات والبنية العامة للخريطة.", points: ["المقياس والإسقاط", "الامتداد", "التسلسل"] },
-      { t: "معالجة البيانات وتحضير نظم المعلومات", d: "تنظيم البيانات الجغرافية ومعالجتها وتحضيرها للإنتاج الكارتوغرافي.", points: ["التنقية", "بنية الطبقات", "تحضير نظم المعلومات"] },
-      { t: "التصميم الكارتوغرافي", d: "تطوير اللغة البصرية للخريطة: الرموز والألوان والخطوط والتسلسل وطريقة عرض المعلومات الجغرافية.", points: ["الرموز", "الألوان والخطوط", "التسلسل البصري"] },
-      { t: "التحرير الكارتوغرافي ومراقبة الجودة", d: "مراجعة الدقة الجغرافية وأسماء الأماكن والمعلومات والاتساق والمقروئية والتوازن البصري.", points: ["أسماء الأماكن", "الاتساق", "المقروئية"] },
-      { t: "الإنتاج النهائي والتسليم", d: "تحضير الملفات النهائية وفق المواصفات المطلوبة للطباعة أو النشر الرقمي أو أي استخدام آخر.", points: ["الطباعة", "النشر الرقمي", "المواصفات"] },
+      { t: "الموجز", d: "فهم هدف المشروع والجمهور المستهدف والنطاق الجغرافي والاستخدام المقصود للمنتج النهائي.", points: ["الهدف والجمهور", "النطاق الجغرافي", "الاستخدام المقصود"] },
+      { t: "بحث البيانات", d: "جمع البيانات الجغرافية والإحصائية والمراجع المطلوبة، وتقييم دقتها وملاءمتها.", points: ["المصادر والمراجع", "الدقة", "الملاءمة"] },
+      { t: "التخطيط", d: "تحديد المقياس والإسقاط والامتداد الجغرافي وتسلسل المعلومات والبنية العامة للخريطة.", points: ["المقياس والإسقاط", "الامتداد", "التسلسل"] },
+      { t: "تحضير نظم المعلومات", d: "تنظيم البيانات الجغرافية ومعالجتها وتحضيرها للإنتاج الكارتوغرافي.", points: ["التنقية", "بنية الطبقات", "تحضير نظم المعلومات"] },
+      { t: "التصميم", d: "تطوير اللغة البصرية للخريطة: الرموز والألوان والخطوط والتسلسل وطريقة عرض المعلومات الجغرافية.", points: ["الرموز", "الألوان والخطوط", "التسلسل البصري"] },
+      { t: "التحرير والمراجعة", d: "مراجعة الدقة الجغرافية وأسماء الأماكن والمعلومات والاتساق والمقروئية والتوازن البصري.", points: ["أسماء الأماكن", "الاتساق", "المقروئية"] },
+      { t: "التسليم", d: "تحضير الملفات النهائية وفق المواصفات المطلوبة للطباعة أو النشر الرقمي أو أي استخدام آخر.", points: ["الطباعة", "النشر الرقمي", "المواصفات"] },
     ],
   },
 
   contact: {
     eyebrow: "تواصل",
-    title: ["لنبدأ مشروعك", "الكارتوغرافي التالي."],
-    body: "أخبرنا عن الجغرافيا والبيانات والجمهور الذي تُصنع له الخريطة، ونردّ بمقاربة لا بقالب جاهز.",
+    title: ["لنتحدّث عن الخرائط."],
+    body: "أخبرنا عن خريطتك، ونردّ بمقاربة.",
     hoursLabel: "ساعات العمل",
     hours: "الإثنين – الجمعة · 9:00 – 18:00 (GMT+2)",
     locationLabel: "الموقع",
@@ -375,12 +359,6 @@ export const pagesAr: PagesDict = {
     orgPlaceholder: "دار نشر، وزارة، جامعة…",
     typePlaceholder: "اختر نوع المشروع",
     optional: "اختياري",
-    nextLabel: "ماذا يحدث بعد ذلك",
-    next: [
-      { t: "نقرأ موجزك", d: "يقرأ بلال مبارك كل استفسار بنفسه." },
-      { t: "محادثة قصيرة", d: "نوضّح الهدف والجمهور والنطاق والبيانات." },
-      { t: "مقاربة كارتوغرافية", d: "تتلقّى مقاربة مقترحة وجدولاً زمنياً والمخرجات." },
-    ],
     channelsLabel: "قنوات مباشرة",
     channels: {
       email: { k: "البريد الإلكتروني", d: "نردّ خلال يومَي عمل." },
@@ -388,16 +366,6 @@ export const pagesAr: PagesDict = {
       visit: { k: "زيارة الستوديو", v: "بيروت، لبنان", d: "بموعد مسبق." },
       follow: { k: "تابعنا", d: "أعمال قيد الإنجاز ولوحات جديدة." },
     },
-    briefLabel: "كتابة الموجز",
-    briefTitle: ["الخريطة الجيدة تبدأ", "بموجز واضح."],
-    briefBody: "لا تحتاج إلى معرفة بالكارتوغرافيا. تساعدنا هذه النقاط الخمس على فهم المشروع من الرسالة الأولى.",
-    brief: [
-      { k: "الهدف", d: "ما الذي يجب أن تساعد الخريطة الناس على فهمه أو فعله." },
-      { k: "الجمهور", d: "من سيقرؤها: طلاب أو متخصصون أو مسافرون أو عامة الناس." },
-      { k: "الجغرافيا", d: "المنطقة المشمولة ومستوى التفصيل المطلوب." },
-      { k: "المواد", d: "البيانات أو المراجع أو الخرائط المتوفّرة لديك." },
-      { k: "الصيغة والتوقيت", d: "طباعة أو رقمي أو كلاهما، مع المقاسات والمواعيد." },
-    ],
     faqLabel: "أسئلة",
     faqTitle: ["قبل أن تكتب."],
     faq: [
